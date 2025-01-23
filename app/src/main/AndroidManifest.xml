@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Guru2_Project"
         tools:targetApi="31">
         <activity
+            android:name=".MedLstPage"
+            android:exported="false" />
+        <activity
+            android:name=".MedRegPage"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
