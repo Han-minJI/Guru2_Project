@@ -18,8 +18,7 @@
             android:background="#272D4F"
             android:clipToOutline="true"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="-7dp"
-            >
+            tools:layout_editor_absoluteY="16dp">
 
 
             <!-- Auto layout, variables, and unit scale are not yet supported -->
@@ -37,7 +36,6 @@
                 android:layout_width="278dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="45dp"
                 android:layout_marginTop="113dp"
@@ -50,16 +48,16 @@
                 android:layout_width="328dp"
                 android:layout_height="56dp"
                 android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginTop="143dp"
+                android:layout_marginRight="45dp"
                 android:foregroundGravity="center">
 
                 <View
                     android:id="@+id/idbox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rectangle3"
-                    android:alpha="0.5"/>
+                    android:alpha="0.5"
+                    android:background="@drawable/rectangle3" />
 
                 <EditText
                     android:id="@+id/userId"
@@ -69,10 +67,10 @@
                     android:background="@android:color/transparent"
                     android:gravity="center_vertical|start"
                     android:hint="ID"
-                    android:textSize="16sp"
                     android:inputType="text"
                     android:paddingStart="16dp"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
             </FrameLayout>
 
             <TextView
@@ -91,16 +89,16 @@
                 android:layout_width="328dp"
                 android:layout_height="56dp"
                 android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginTop="243dp"
+                android:layout_marginRight="45dp"
                 android:foregroundGravity="center">
 
                 <View
                     android:id="@+id/passwdbox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rectangle3"
-                    android:alpha="0.5"/>
+                    android:alpha="0.5"
+                    android:background="@drawable/rectangle3" />
 
                 <EditText
                     android:id="@+id/userPasswd"
@@ -110,10 +108,10 @@
                     android:background="@android:color/transparent"
                     android:gravity="center_vertical|start"
                     android:hint="PASSWORD"
-                    android:textSize="16sp"
                     android:inputType="textPassword"
                     android:paddingStart="16dp"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
             </FrameLayout>
 
             <TextView
@@ -132,16 +130,16 @@
                 android:layout_width="328dp"
                 android:layout_height="56dp"
                 android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginTop="343dp"
+                android:layout_marginRight="45dp"
                 android:foregroundGravity="center">
 
                 <View
                     android:id="@+id/namebox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rectangle3"
-                    android:alpha="0.5"/>
+                    android:alpha="0.5"
+                    android:background="@drawable/rectangle3" />
 
                 <EditText
                     android:id="@+id/userName"
@@ -151,10 +149,10 @@
                     android:background="@android:color/transparent"
                     android:gravity="center_vertical|start"
                     android:hint="NAME"
-                    android:textSize="16sp"
                     android:inputType="text"
                     android:paddingStart="16dp"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
             </FrameLayout>
 
             <TextView
@@ -172,8 +170,8 @@
                 android:layout_width="334dp"
                 android:layout_height="72dp"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
                 android:layout_marginTop="435dp"
+                android:layout_marginRight="40dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -287,8 +285,8 @@
                 android:layout_width="328dp"
                 android:layout_height="56dp"
                 android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginTop="543dp"
+                android:layout_marginRight="45dp"
                 android:foregroundGravity="center">
 
                 <View
@@ -302,8 +300,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:spinnerMode="dropdown"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:spinnerMode="dropdown" />
             </FrameLayout>
 
             <FrameLayout
@@ -311,8 +309,8 @@
                 android:layout_width="328dp"
                 android:layout_height="57dp"
                 android:layout_marginLeft="45dp"
-                android:layout_marginRight="45dp"
                 android:layout_marginTop="650dp"
+                android:layout_marginRight="45dp"
                 android:layout_marginBottom="50dp">
 
                 <ImageButton
@@ -325,11 +323,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/rubiks"
+                    android:gravity="center"
                     android:text="가입하기"
                     android:textColor="@color/navy"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/rubiks"
-                    android:gravity="center" />
+                    android:textSize="18sp" />
             </FrameLayout>
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

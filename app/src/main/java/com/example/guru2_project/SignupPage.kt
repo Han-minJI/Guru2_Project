@@ -62,7 +62,7 @@ class SignupPage : AppCompatActivity() {
 
 
 
-        dbManager = DBManager(this, "userDB", null, 7) //버전 6으로 통일 , 생년월일 추가하면 버전 7까지 버전 올라갈 것 같음
+        dbManager = DBManager(this, "userDB", null, 7)
 
         // Spinner 데이터 설정
         val types = listOf("당뇨병 전단계", "제1형 당뇨병", "제2형 당뇨병")

@@ -7,60 +7,105 @@
     android:layout_height="match_parent"
     tools:context=".MyPage">
     <!-- 5번째 줄 : 기존 Id가 logoutButton으로 되어있어서 충돌이 일어남, 현재 생성된 모든 파일을 DANO로 변경 -->
-
-    <ImageView
-        android:id="@+id/mypageimage"
-        android:layout_width="133dp"
-        android:layout_height="118dp"
-        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
+    <RelativeLayout
+        android:id="@+id/some_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#272D4F"
+        android:clipToOutline="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.161"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247"
-        tools:srcCompat="@drawable/ic_android_black_24dp" />
+        tools:layout_editor_absoluteY="0dp">
 
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="140dp"
-        android:layout_height="61dp"
-        android:layout_marginBottom="44dp"
-        android:text="logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#272D4F">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="36dp"
-        android:text="생년월일: 아직 구현 진행 중"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userTypeTextView" />
+            <!-- 프로필 이미지 -->
+            <ImageView
+                android:id="@+id/mypageimage"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_marginStart="30dp"
+                android:contentDescription="프로필 이미지"
+                android:src="@drawable/profilevector"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2" />
 
-    <TextView
-        android:id="@+id/userTypeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="220dp"
-        android:layout_marginTop="32dp"
-        android:text="유형:"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
+            <!-- 정보 그룹 -->
+            <LinearLayout
+                android:id="@+id/infoGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/mypageimage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/mypageimage"
+                app:layout_constraintTop_toTopOf="@id/mypageimage">
 
-    <TextView
-        android:id="@+id/userNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="220dp"
-        android:layout_marginTop="124dp"
-        android:text="이름:"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                <!-- 이름 -->
+                <TextView
+                    android:id="@+id/userNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubiks"
+                    android:text="이름"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+                <!-- 생년월일 -->
+                <TextView
+                    android:id="@+id/userBirthTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubiks"
+                    android:text="생년월일"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+
+                <!-- 유형 -->
+                <TextView
+                    android:id="@+id/userTypeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rubiks"
+                    android:text="유형"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/login_button_container"
+            android:layout_width="328dp"
+            android:layout_height="57dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="550dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="70dp">
+
+            <ImageButton
+                android:id="@+id/logoutButton"
+                android:layout_width="276dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/rectangle_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rubiks"
+                android:gravity="center"
+                android:text="로그아웃"
+                android:textColor="@color/navy"
+                android:textSize="18sp" />
+        </FrameLayout>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

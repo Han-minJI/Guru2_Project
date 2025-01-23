@@ -7,33 +7,132 @@
     android:layout_height="match_parent"
     tools:context=".MainPage">
     <!-- 5번째 줄 : 기존 Id가 logoutButton으로 되어있어서 충돌이 일어남, 현재 생성된 모든 파일을 DANO로 변경 -->
-
-    <ImageButton
-        android:id="@+id/mypagebutton"
-        android:layout_width="68dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
+    <RelativeLayout
+        android:id="@+id/some_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#272D4F"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/ic_android_black_24dp" />
+        tools:layout_editor_absoluteY="0dp">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"
-        android:text="마이페이지 이동 버튼"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mypagebutton" />
+        <TextView
+            android:id="@+id/dano"
+            android:layout_width="wrap_content"
+            android:layout_height="98dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/rubiks"
+            android:gravity="top"
+            android:text="@string/dano"
+            android:textAppearance="@style/smalldano" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="텍스트 추가"
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="227dp" />
+        <!--마이페이지 바로가기 버튼 -->
+
+        <!--혈당 기록하기 버튼 -->
+
+        <ImageButton
+            android:id="@+id/mypagebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="8dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/miniprofilevector"
+            android:scaleType="fitCenter" />
+
+        <FrameLayout
+            android:id="@+id/login_button_container"
+            android:layout_width="250dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="280dp"
+            android:layout_marginRight="45dp"
+            android:layout_centerHorizontal="true">
+
+            <ImageButton
+                android:id="@+id/ImageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/rubiks"
+                android:gravity="center"
+                android:text="혈당 기록하기"
+                android:textColor="@color/navy"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <!-- 나의 운동기록 / 나의 생활체크 -->
+        <LinearLayout
+            android:id="@+id/Mainicon1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="380dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:baselineAligned="false">
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/abc"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
+
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/abc2"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
+        </LinearLayout>
+
+        <!--나의 내원기록 / 나의 복약 체크 -->
+        <LinearLayout
+            android:id="@+id/Mainicon2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="530dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:baselineAligned="false">
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/abc3"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/abc4"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true" />
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

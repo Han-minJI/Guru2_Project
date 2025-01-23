@@ -4,6 +4,7 @@ import android.content.Intent
 import android.database.Cursor
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,9 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 class MyPage : AppCompatActivity() {
 
     lateinit var dbManager: DBManager
-    lateinit var logoutButton: Button
+    lateinit var logoutButton: ImageButton
     lateinit var userNameTextView: TextView
     lateinit var userTypeTextView: TextView
+    lateinit var userBirthTextView :TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +24,7 @@ class MyPage : AppCompatActivity() {
         logoutButton = findViewById(R.id.logoutButton)
         userNameTextView = findViewById(R.id.userNameTextView)
         userTypeTextView = findViewById(R.id.userTypeTextView)
+        userBirthTextView = findViewById(R.id.userBirthTextView)
 
         dbManager = DBManager(this, "userDB", null, 7)  //버전 6으로 통일 , 생년월일 추가하면 버전 7까지 버전 올라갈 것 같음
 
@@ -35,17 +38,19 @@ class MyPage : AppCompatActivity() {
 
                 // member 테이블에서 사용자 정보 가져오기
                 val memberCursor: Cursor = dbManager.readableDatabase.rawQuery(
-                    "SELECT userName, userType FROM member WHERE userId = ? AND userPasswd = ?",
+                    "SELECT userName,BirthDate, userType FROM member WHERE userId = ? AND userPasswd = ?",
                     arrayOf(userId, userPasswd)
                 )
 
                 if (memberCursor.moveToFirst()) {
                     val userName = memberCursor.getString(0)
-                    val userType = memberCursor.getString(1)
+                    val userBirth = memberCursor.getString(1)
+                    val userType = memberCursor.getString(2)
 
                     // 사용자 정보 표시
-                    userNameTextView.text = "이름: $userName"
-                    userTypeTextView.text = "유형: $userType"
+                    userNameTextView.text = "$userName"
+                    userBirthTextView.text = "$userBirth"
+                    userTypeTextView.text = "$userType"
                 } else {
                     Toast.makeText(this, "사용자 정보를 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
                 }
