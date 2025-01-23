@@ -1,71 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/DANO"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- 배경 설정 -->
+    <RelativeLayout
+        android:id="@+id/starttext"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#272D4F"
+        android:clipToOutline="true">
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="167dp"
-        android:layout_marginTop="162dp"
-        android:layout_marginEnd="156dp"
-        android:layout_marginBottom="145dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <!-- 타이틀 텍스트 -->
+        <TextView
+            android:id="@+id/dano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="180dp"
+            android:layout_marginBottom="170dp"
+            android:fontFamily="@font/rubiks"
+            android:gravity="center"
+            android:text="@string/dano"
+            android:textAppearance="@style/dano" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="텍스트뷰"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="212dp" />
+        <FrameLayout
+            android:id="@+id/group_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/dano"
+            android:layout_marginTop="50dp"> <!-- 타이틀과의 간격 -->
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
+            <!-- 사각형 드로어블 배경 -->
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="구루 하기 시렁"
-        tools:layout_editor_absoluteX="179dp"
-        tools:layout_editor_absoluteY="275dp" />
+            <!-- 시작하기 텍스트 -->
+            <ImageButton
+                android:id="@+id/startDANO"
+                android:layout_width="328dp"
+                android:layout_height="57dp"
+                android:background="@drawable/rectangle_1" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="튜터님 나빠"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="133dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="시작하기"
+                android:textAppearance="@style/fontnavy" />
+        </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </RelativeLayout>
+</FrameLayout>
