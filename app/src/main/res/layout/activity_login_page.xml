@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/DANO"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginPage">
+
+    <!-- 배경 설정 -->
+    <RelativeLayout
+        android:id="@+id/some_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#272D4F"
+        android:clipToOutline="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="-7dp">
+
+        <!-- 타이틀 텍스트 -->
+        <TextView
+            android:id="@+id/dano"
+            android:layout_width="wrap_content"
+            android:layout_height="98dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="63dp"
+            android:fontFamily="@font/rubiks"
+            android:gravity="top"
+            android:text="@string/dano"
+            android:textAppearance="@style/dano" />
+
+        <!-- 설명 텍스트 -->
+        <TextView
+            android:layout_width="289dp"
+            android:layout_height="84dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="171dp"
+            android:gravity="top"
+            android:lineSpacingExtra="6sp"
+            android:text="다노와 함께 더 건강한 하루를 위한 당뇨 관리"
+            android:textAppearance="@style/font2"
+            android:textColor="#FFFFFF" />
+
+        <!-- ID 입력 박스 -->
+        <FrameLayout
+            android:id="@+id/idbox_container"
+            android:layout_width="328dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="270dp">
+
+            <View
+                android:id="@+id/idbox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle_1"
+                android:alpha="0.5"/>
+
+            <EditText
+                android:id="@+id/userId"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical|start"
+                android:hint="ID"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:textColor="#ffffff"
+                android:textSize="18sp"/>
+        </FrameLayout>
+
+        <!-- 패스워드 입력 박스 -->
+        <FrameLayout
+            android:id="@+id/passwdbox_container"
+            android:layout_width="328dp"
+            android:layout_height="56dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="350dp"
+            android:alpha="0.5">
+
+            <View
+                android:id="@+id/passwdbox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle_1" />
+
+            <EditText
+                android:id="@+id/userPasswd"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical|start"
+                android:hint="PASSWORD"
+                android:inputType="textPassword"
+                android:paddingStart="16dp"
+                android:textColor="#ffffff"
+                android:textSize="18sp"/>
+        </FrameLayout>
+
+        <!-- 패스워드 밑 라인 -->
+        <TextView
+            android:id="@+id/forgetpasswd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="420dp"
+            android:gravity="top"
+            android:text="Forget Password"
+            android:textAppearance="@style/font1" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="328dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="470dp"
+            android:background="#FFFFFF" />
+
+        <!-- 로그인 버튼 -->
+        <FrameLayout
+            android:id="@+id/login_button_container"
+            android:layout_width="328dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="490dp">
+
+            <ImageButton
+                android:id="@+id/loginbutton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle_1" />
+
+            <TextView
+                android:id="@+id/login_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="로그인"
+                android:textColor="@color/navy"
+                android:textSize="18sp"
+                android:fontFamily="@font/rubiks"
+                android:gravity="center" />
+        </FrameLayout>
+
+        <!-- 회원가입 버튼 -->
+        <FrameLayout
+            android:id="@+id/signup_button_container"
+            android:layout_width="328dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="550dp">
+
+            <ImageButton
+                android:id="@+id/gotoSignupButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectanglenavy" />
+
+            <TextView
+                android:id="@+id/gotosignup_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="회원가입"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:fontFamily="@font/rubiks"
+                android:gravity="center" />
+        </FrameLayout>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
