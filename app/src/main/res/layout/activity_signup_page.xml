@@ -93,14 +93,14 @@
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="45dp"
                 android:layout_marginTop="243dp"
-                android:alpha="0.5"
                 android:foregroundGravity="center">
 
                 <View
                     android:id="@+id/passwdbox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rectangle3" />
+                    android:background="@drawable/rectangle3"
+                    android:alpha="0.5"/>
 
                 <EditText
                     android:id="@+id/userPasswd"
@@ -110,10 +110,10 @@
                     android:background="@android:color/transparent"
                     android:gravity="center_vertical|start"
                     android:hint="PASSWORD"
+                    android:textSize="16sp"
                     android:inputType="textPassword"
                     android:paddingStart="16dp"
-                    android:textColor="#ffffff"
-                    android:textSize="16sp"/>
+                    android:textColor="#ffffff" />
             </FrameLayout>
 
             <TextView
@@ -134,14 +134,14 @@
                 android:layout_marginLeft="45dp"
                 android:layout_marginRight="45dp"
                 android:layout_marginTop="343dp"
-                android:alpha="0.5"
                 android:foregroundGravity="center">
 
                 <View
                     android:id="@+id/namebox"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rectangle3" />
+                    android:background="@drawable/rectangle3"
+                    android:alpha="0.5"/>
 
                 <EditText
                     android:id="@+id/userName"
@@ -151,10 +151,10 @@
                     android:background="@android:color/transparent"
                     android:gravity="center_vertical|start"
                     android:hint="NAME"
+                    android:textSize="16sp"
                     android:inputType="text"
                     android:paddingStart="16dp"
-                    android:textColor="#ffffff"
-                    android:textSize="16sp" />
+                    android:textColor="#ffffff" />
             </FrameLayout>
 
             <TextView

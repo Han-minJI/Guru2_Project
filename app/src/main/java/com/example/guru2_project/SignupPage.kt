@@ -38,7 +38,7 @@ class SignupPage : AppCompatActivity() {
         signupbtn = findViewById(R.id.signupbutton)
 
         //생년월일
-        val years = listOf("YYYY")+(1900..2025).toList().map { it.toString() } // 1900년부터 2025년까지
+        val years = listOf("YYYY")+(1920..2025).toList().map { it.toString() } // 1900년부터 2025년까지
         val months = listOf("MM")+(1..12).toList().map { it.toString().padStart(2, '0') } // 01 ~ 12
         val days = listOf("DD") +(1..31).toList().map { it.toString().padStart(2, '0') } // 01 ~ 31
 
@@ -71,7 +71,7 @@ class SignupPage : AppCompatActivity() {
         typeSpinner.adapter = adapter
 
         //회원가입 버튼 클릭
-        signupbtn.setOnClickListener{
+        signupbtn.setOnClickListener {
             val userId = userid.text.toString()
             val userPasswd = userpasswd.text.toString()
             val userName = username.text.toString()
@@ -86,15 +86,25 @@ class SignupPage : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            sqlitedb = dbManager.writableDatabase
-            sqlitedb.execSQL("INSERT INTO member VALUES ('$userId', '$userPasswd', '$userName', '\$$birthDate','$userType')") // member 테이블에 회원 정보 등록, 추후 생년월일 추가
+            sqlitedb = dbManager.readableDatabase
 
-            Toast.makeText(this,"회원가입 성공", Toast.LENGTH_SHORT).show()
-            sqlitedb.close()
+            val cursor = sqlitedb.rawQuery("SELECT * FROM member WHERE userId = '$userId'", null)
 
-            val intent = Intent(this, SussessPage::class.java)
-            intent.putExtra("userId", userId)
-            startActivity(intent)
+            if (cursor.count > 0) {
+                // 아이디가 이미 존재하는 경우
+                Toast.makeText(this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                // 아이디가 중복되지 않은 경우 회원가입 처리
+                sqlitedb = dbManager.writableDatabase
+                sqlitedb.execSQL("INSERT INTO member VALUES ('$userId', '$userPasswd', '$userName', '$birthDate', '$userType')")
+
+                Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show()
+
+                // 성공 시 성공 페이지로 이동
+                val intent = Intent(this, SussessPage::class.java)
+                intent.putExtra("userId", userId)
+                startActivity(intent)
+            }
         }
 
     }
