@@ -150,7 +150,6 @@ class MedRegPage : AppCompatActivity() {
             // MedLstPage (복약 체크리스트 화면)으로 Intent 전달하며, 해당 화면으로 화면 전환
             val intent = Intent(this, MedLstPage::class.java)
             startActivity(intent)
-
         }
     }
 }

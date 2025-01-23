@@ -1,87 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/navy"
+    android:orientation="vertical"
     tools:context=".MedRegPage">
-    <!-- 약 이름 입력하기 전에 설명해주는 TextView -->
+
     <TextView
-        android:id="@+id/medNameTxt"
+        android:id="@+id/some_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="15dp"
-        android:text="어떤 약을 드시나요?"
-        app:layout_constraintBottom_toTopOf="@+id/edtMedName"
-        app:layout_constraintStart_toStartOf="@+id/edtMedName" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/pretendardvariable"
+        android:gravity="top"
+        android:text="복약 체크하기"
+        android:textColor="@color/white_smoke"
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
-    <!-- 복용약 이름 입력 -->
     <EditText
         android:id="@+id/edtMedName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        android:ems="10"
+        android:layout_width="331dp"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle3"
         android:hint="약 이름 입력"
-        android:inputType="text"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
-        app:layout_constraintStart_toStartOf="@+id/medNameTxt"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="141dp" />
 
-    <!-- 요일 선택하기 전에 설명해주는 TextView -->
+    <ImageView
+        android:id="@+id/line_"
+        android:layout_width="350dp"
+        android:layout_height="0dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/line1"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="413dp" />
+
     <TextView
         android:id="@+id/dayOfWeekTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="62dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/pretendardvariable"
+        android:gravity="top"
         android:text="요일을 선택해주세요"
+        android:textColor="@color/white_smoke"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtMedName" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="283dp" />
 
-    <!-- 모든 요일 선택하는 버튼 (매일) -->
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchDayOfWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="18dp"
         android:text="매일"
-        app:layout_constraintBottom_toTopOf="@+id/cGroupDayOfWeek"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="304dp"
+        tools:layout_editor_absoluteY="263dp" />
 
-    <!-- 요일 개별 선택 Chip 버튼을 위한 ChipGroup -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/cGroupDayOfWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="11dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayOfWeekTxt">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="341dp">
 
-        <!-- 일요일 선택 Chip -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipSun"
             style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-            android:text="일" />
+            android:text="일"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- 월요일 선택 Chip -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipMon"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="월" />
+            android:text="월"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- 화요일 선택 Chip -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipTue"
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -89,7 +117,6 @@
             android:layout_height="wrap_content"
             android:text="화" />
 
-        <!-- 수요일 선택 Chip -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipWed"
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -97,7 +124,6 @@
             android:layout_height="wrap_content"
             android:text="수" />
 
-        <!-- 목요일 선택 Chip -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipThur"
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -105,7 +131,6 @@
             android:layout_height="wrap_content"
             android:text="목" />
 
-        <!-- 금요일 선택 Chip -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipFri"
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -113,7 +138,6 @@
             android:layout_height="wrap_content"
             android:text="금" />
 
-        <!-- 토요일 선택 Chip -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipSat"
             style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -123,41 +147,154 @@
 
     </com.google.android.material.chip.ChipGroup>
 
-    <!-- 복약 예정 시간 입력하기 전 설명해주는 TextView -->
     <TextView
         android:id="@+id/medTimeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="41dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/pretendardvariable"
+        android:gravity="top"
         android:text="몇 시에 드시는 약인가요?"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cGroupDayOfWeek" />
+        android:textColor="@color/white_smoke"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="425dp" />
 
-    <!-- 복약 예정 시간 입력 -->
     <EditText
         android:id="@+id/edtMedTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
+        android:layout_width="331dp"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/rectangle3"
         android:hint="시간 선택"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/medTimeTxt"
-        app:layout_constraintTop_toBottomOf="@+id/medTimeTxt" />
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="461dp" />
 
-    <!-- "등록하기" 버튼 : MedLstPage(복약 리스트 화면)으로 이동 -->
-    <Button
-        android:id="@+id/btnMedReg"
+    <TextView
+        android:id="@+id/medNameTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="등록하기"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/pretendardvariable"
+        android:gravity="top"
+        android:text="어떤 약을 복용/투약하시나요?"
+        android:textColor="@color/white_smoke"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.879" />
+        tools:layout_editor_absoluteY="105dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/line_1"
+        android:layout_width="350dp"
+        android:layout_height="0dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/line1"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="293dp" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btnMedReg"
+            android:layout_width="280dp"
+            android:layout_height="52dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/rectangle_1"
+            tools:layout_editor_absoluteX="65dp"
+            tools:layout_editor_absoluteY="596dp" />
+
+        <TextView
+            android:id="@+id/btnToMedRegTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/rubiks"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="등록하기"
+            android:textColor="@color/navy"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="607dp" />
+    </FrameLayout>
+
+
+
+
+</LinearLayout>
+
+
+    <!--    <Button-->
+    <!--        android:id="@+id/btnMedReg"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="등록하기"-->
+    <!--        tools:layout_editor_absoluteX="162dp"-->
+    <!--        tools:layout_editor_absoluteY="601dp" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/edtMedTime"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="시간 선택"-->
+    <!--        android:inputType="text"-->
+    <!--        tools:layout_editor_absoluteX="46dp"-->
+    <!--        tools:layout_editor_absoluteY="474dp" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/medTimeTxt"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="몇 시에 드시는 약인가요?"-->
+    <!--        tools:layout_editor_absoluteX="46dp"-->
+    <!--        tools:layout_editor_absoluteY="435dp" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/medNameTxt"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="5dp"-->
+    <!--        android:layout_marginBottom="15dp"-->
+    <!--        android:text="어떤 약을 드시나요?"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/edtMedName"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/edtMedName" />-->
+
+    <!--    <EditText-->
+    <!--        android:id="@+id/edtMedName"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="96dp"-->
+    <!--        android:ems="10"-->
+    <!--        android:hint="약 이름 입력"-->
+    <!--        android:inputType="text"-->
+    <!--        android:padding="15dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.178"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/medNameTxt"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <!--    -->
+    <!--    <TextView-->
+    <!--        android:id="@+id/dayOfWeekTxt"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="52dp"-->
+    <!--        android:layout_marginTop="62dp"-->
+    <!--        android:text="요일을 선택해주세요"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/edtMedName" />-->
