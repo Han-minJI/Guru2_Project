@@ -4,4 +4,22 @@
     <color name="white">#FFFFFFFF</color>
     <color name ="navy">#272D4F</color>
     <color name="white_smoke">#F5F5F5</color>
+
+    <!--캘린더 뷰 관련 color-->
+    <color name="teal_700">#FF018786</color>
+    <color name="green_700">#00584A</color>
+    <color name="calendar_sun">#CD2E57</color>
+    <color name="calendar_sat">#0064FF</color>
+    <color name="btn_color">#F5F5F5</color>
+    <color name="text_color">#1D2E4A</color>
+    <color name="edit_color">#66272D4F</color>
+    <color name="bg_color">#272D4F</color>
+    <color name="text_color2">#FEFCFD</color>
+    <color name="edittext_bg_color">#66F5F5F5</color>
+    <color name="calendar_bg_color">#4DF5F5F5</color>
+    <color name="calendar_title">#0F1A2C</color>
+    <color name="selector_color">#EEEEEE</color>
+    <color name="calender_color_blue">#6DA4FF</color>
+    <color name="enabled_date_color">#D7D7D9</color>
+
 </resources>
