@@ -144,7 +144,8 @@
             app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/switchDayOfWeek"
-            app:singleLine="true">
+            app:singleLine="true"
+            app:checkedChip="@color/navy">
 
 
             <com.google.android.material.chip.Chip
@@ -152,49 +153,70 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="일" />
+                android:text="일"
+                android:textColor="@color/text_color2"
+                app:chipSurfaceColor="#33FEFDFC"
+                app:rippleColor="#344FA0" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipMon"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="월" />
+                android:text="월"
+                android:textColor="@color/text_color2"
+                app:chipSurfaceColor="#33FEFDFC"
+                app:rippleColor="#344FA0" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipTue"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="화" />
+                android:text="화"
+                android:textColor="@color/text_color2"
+                app:chipSurfaceColor="#33FEFDFC"
+                app:rippleColor="#344FA0" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipWed"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="수" />
+                android:text="수"
+                android:textColor="@color/text_color2"
+                app:chipSurfaceColor="#33FEFDFC"
+                app:rippleColor="#344FA0" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipThur"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="목" />
+                android:text="목"
+                android:textColor="@color/text_color2"
+                app:chipSurfaceColor="#33FEFDFC"
+                app:rippleColor="#344FA0" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipFri"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="금" />
+                android:text="금"
+                android:textColor="@color/text_color2"
+                app:chipSurfaceColor="#33FEFDFC"
+                app:rippleColor="#344FA0" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipSat"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="토" />
+                android:text="토"
+                android:textColor="@color/text_color2"
+                app:chipSurfaceColor="#33FEFDFC"
+                app:rippleColor="#344FA0" />
 
         </com.google.android.material.chip.ChipGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>

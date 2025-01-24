@@ -173,7 +173,7 @@ class MedRegPage : AppCompatActivity() {
                         edtMedName.text.toString() + "', '" +
                         userDayOfWeek + "', '" +
                         edtMedTime.text.toString() + "', '" +
-                        LocalDate.now().toString() + "', 1)"
+                        LocalDate.now().toString() + "', 0)"
             )
             sqlitedb.close()
 
