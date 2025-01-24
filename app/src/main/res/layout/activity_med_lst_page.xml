@@ -1,42 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/navy"
+    android:orientation="vertical"
     tools:context=".MedLstPage">
 
-    <!-- MedRegPage (복약 등록 화면) 으로 이동하는 버튼 -->
-    <ImageButton
-        android:id="@+id/btnToMedReg"
-        android:layout_width="0dp"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
+        android:orientation="horizontal"
+        android:layout_margin="20dp">
+
+        <ImageButton
+            android:id="@+id/btnBckToMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/img_tomain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.002"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/some_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_vertical"
+            android:fontFamily="@font/pretendardvariable"
+            android:text="복약 체크하기"
+            android:textColor="@color/text_color2"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+
+        <ImageButton
+            android:id="@+id/btnToMedReg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_1"
+            tools:layout_editor_absoluteX="65dp"
+            tools:layout_editor_absoluteY="596dp" />
+
+        <TextView
+            android:id="@+id/btnToMedRegTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/rubiks"
+            android:gravity="center"
+            android:text="복용/투여하시는 약을 선택해주세요"
+            android:textColor="@color/navy"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="607dp" />
+    </FrameLayout>
+
+
+    <!-- MedRegPage (복약 등록 화면) 으로 이동하는 버튼 -->
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/btnToMedReg"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.086" />-->
 
     <!-- CheckBox(복약 체크리스트)가 계속 화면에 추가되므로 ScrollView 추가 -->
     <ScrollView
         android:id="@+id/medScrollView"
         android:layout_width="373dp"
         android:layout_height="493dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
 
         <!-- CheckBox(복약 체크리스트) 를 담을 LinearLayout -->
         <LinearLayout
             android:id="@+id/medLstLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="vertical" />
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

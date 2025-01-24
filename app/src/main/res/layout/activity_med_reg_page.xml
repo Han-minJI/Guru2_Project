@@ -9,229 +9,299 @@
     android:orientation="vertical"
     tools:context=".MedRegPage">
 
-    <TextView
-        android:id="@+id/some_id"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/pretendardvariable"
-        android:gravity="top"
-        android:text="복약 체크하기"
-        android:textColor="@color/white_smoke"
-        android:textSize="25dp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:layout_margin="20dp">
 
-    <EditText
-        android:id="@+id/edtMedName"
-        android:layout_width="331dp"
-        android:layout_height="55dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/rectangle3"
-        android:hint="약 이름 입력"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="141dp" />
+        <ImageButton
+            android:id="@+id/btnBckToMedLst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/img_tomain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.002"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/some_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_vertical"
+            android:fontFamily="@font/pretendardvariable"
+            android:text="복약 체크하기"
+            android:textColor="@color/text_color2"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/medNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardvariable"
+            android:gravity="top"
+            android:text="어떤 약을 복용/투약하시나요?"
+            android:textColor="@color/white_smoke"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.167"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.086" />
+
+        <EditText
+            android:id="@+id/edtMedName"
+            android:layout_width="331dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rectangle3"
+            android:hint="약 이름 입력"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/text_color2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medNameTxt"
+            app:layout_constraintVertical_bias="0.842" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/line_"
         android:layout_width="350dp"
-        android:layout_height="0dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/line1"
-        tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="413dp" />
-
-    <TextView
-        android:id="@+id/dayOfWeekTxt"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/pretendardvariable"
-        android:gravity="top"
-        android:text="요일을 선택해주세요"
-        android:textColor="@color/white_smoke"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="283dp" />
+        android:layout_gravity="center"
+        android:background="@drawable/line1" />
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switchDayOfWeek"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="매일"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="304dp"
-        tools:layout_editor_absoluteY="263dp" />
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/cGroupDayOfWeek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="13dp"
-        tools:layout_editor_absoluteY="341dp">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipSun"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="48dp"
+        <TextView
+            android:id="@+id/dayOfWeekTxt"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="일"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/pretendardvariable"
+            android:gravity="top"
+            android:text="요일을 선택해주세요"
+            android:textColor="@color/white_smoke"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.081"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipMon"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchDayOfWeek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="월"
+            android:layout_marginTop="16dp"
+            android:text="매일"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/cGroupDayOfWeek"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.947"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.050000012"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cGroupDayOfWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:chipSpacingHorizontal="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/switchDayOfWeek"
+            app:singleLine="true">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipTue"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="화" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipWed"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSun"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="일" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipThur"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="목" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMon"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="월" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipFri"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="금" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTue"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="화" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipSat"
-            style="@style/Widget.MaterialComponents.Chip.Choice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="토" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipWed"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수" />
 
-    </com.google.android.material.chip.ChipGroup>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipThur"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="목" />
 
-    <TextView
-        android:id="@+id/medTimeTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/pretendardvariable"
-        android:gravity="top"
-        android:text="몇 시에 드시는 약인가요?"
-        android:textColor="@color/white_smoke"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="38dp"
-        tools:layout_editor_absoluteY="425dp" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFri"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="금" />
 
-    <EditText
-        android:id="@+id/edtMedTime"
-        android:layout_width="331dp"
-        android:layout_height="55dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/rectangle3"
-        android:hint="시간 선택"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="461dp" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSat"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="토" />
 
-    <TextView
-        android:id="@+id/medNameTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/pretendardvariable"
-        android:gravity="top"
-        android:text="어떤 약을 복용/투약하시나요?"
-        android:textColor="@color/white_smoke"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteY="105dp" />
+        </com.google.android.material.chip.ChipGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/line_1"
         android:layout_width="350dp"
-        android:layout_height="0dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@drawable/line1"
         tools:layout_editor_absoluteX="31dp"
         tools:layout_editor_absoluteY="293dp" />
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <!--    <TextView-->
+<!--        android:id="@+id/medTimeTxt"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/pretendardvariable"-->
+<!--        android:gravity="top"-->
+<!--        android:text="몇 시에 드시는 약인가요?"-->
+<!--        android:textColor="@color/white_smoke"-->
+<!--        android:textSize="20sp"-->
+<!--        tools:layout_editor_absoluteX="38dp"-->
+<!--        tools:layout_editor_absoluteY="425dp" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/edtMedTime"-->
+<!--        android:layout_width="331dp"-->
+<!--        android:layout_height="55dp"-->
+<!--        android:background="@drawable/rectangle3"-->
+<!--        android:hint="시간 선택"-->
+<!--        android:paddingLeft="20dp"-->
+<!--        android:paddingRight="20dp"-->
+<!--        tools:layout_editor_absoluteX="40dp"-->
+<!--        tools:layout_editor_absoluteY="461dp" />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/medTimeTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/pretendardvariable"
+            android:gravity="top"
+            android:text="몇 시에 드시는 약인가요?"
+            android:textColor="@color/white_smoke"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/edtMedTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.093"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8" />
+
+        <EditText
+            android:id="@+id/edtMedTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/rectangle3"
+            android:hint="오전 8:00"
+            android:textColor="@color/text_color2"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/btnMedReg"
-            android:layout_width="280dp"
-            android:layout_height="52dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="@drawable/rectangle_1"
-            tools:layout_editor_absoluteX="65dp"
-            tools:layout_editor_absoluteY="596dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/btnToMedRegTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
             android:fontFamily="@font/rubiks"
             android:gravity="center"
-            android:layout_gravity="center"
             android:text="등록하기"
             android:textColor="@color/navy"
             android:textSize="18sp"
-            tools:layout_editor_absoluteX="173dp"
-            tools:layout_editor_absoluteY="607dp" />
-    </FrameLayout>
-
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

@@ -12,6 +12,7 @@ import java.time.LocalDate
 import java.util.Calendar
 
 class MedLstPage : AppCompatActivity() {
+    lateinit var btnBckToMain : ImageButton
 
     // "복용하시는 약을 등록해주세요" -> MedRegPage(복약 등록) 페이지로 이동 위한 버튼
     lateinit var btnToMedReg : ImageButton
@@ -46,8 +47,15 @@ class MedLstPage : AppCompatActivity() {
 
 
         // Layout의 위젯 ID와 앞서 선언한 변수 연결
+        btnBckToMain = findViewById(R.id.btnBckToMain)
+
         btnToMedReg = findViewById(R.id.btnToMedReg)    // MedRegPage (복용약 등록 화면) 으로 이동하는 버튼 -> 복용하시는 약을 등록해주세요
         medLstLayout = findViewById(R.id.medLstLayout)  // 복용 체크리스트가 표시될 레이아웃
+
+        btnBckToMain.setOnClickListener {
+            val intent=Intent(this,MainPage::class.java)
+            startActivity(intent)
+        }
 
 //        val today: String? = getDayOfWeek()
 
