@@ -93,7 +93,7 @@
                 android:adjustViewBounds="true" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/habitCheckBtn"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="8dp"
@@ -124,7 +124,7 @@
                 android:adjustViewBounds="true" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/medCheckBtn"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="8dp"

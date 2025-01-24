@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 class MainPage : AppCompatActivity() {
     lateinit var mypagebutton: ImageButton
     lateinit var clinicRecordBtn:ImageButton//내원 기록하기 버튼
+    lateinit var medCheckBtn:ImageButton //복약 체크하기 버튼
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +16,7 @@ class MainPage : AppCompatActivity() {
 
         mypagebutton = findViewById(R.id.mypagebutton)
         clinicRecordBtn=findViewById(R.id.clinicRecordBtn)
+        medCheckBtn=findViewById(R.id.medCheckBtn)
 
         //이미지 버튼 클릭시 마이페이지로 넘어가도록
         mypagebutton.setOnClickListener {
@@ -28,6 +30,11 @@ class MainPage : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //복약 체크하기 버튼 클릭시 복약 체크하기 화면으로 넘어가기
+        medCheckBtn.setOnClickListener {
+            val intent=Intent(this,MedRegPage::class.java)
+            startActivity(intent)
+        }
 
     }
 }
