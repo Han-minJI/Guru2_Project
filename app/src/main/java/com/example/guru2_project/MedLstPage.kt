@@ -4,10 +4,11 @@ import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.view.ViewGroup.MarginLayoutParams
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.time.LocalDate
@@ -15,6 +16,7 @@ import java.util.Calendar
 
 class MedLstPage : AppCompatActivity() {
     lateinit var btnBckToMain : ImageButton
+    lateinit var btnInitMed : Button
 
     // "복용하시는 약을 등록해주세요" -> MedRegPage(복약 등록) 페이지로 이동 위한 버튼
     lateinit var btnToMedReg : ImageButton
@@ -47,6 +49,7 @@ class MedLstPage : AppCompatActivity() {
 
         // Layout의 위젯 ID와 앞서 선언한 변수 연결
         btnBckToMain = findViewById(R.id.btnBckToMain)
+        btnInitMed = findViewById(R.id.btnInitMed)
 
         btnToMedReg = findViewById(R.id.btnToMedReg)    // MedRegPage (복용약 등록 화면) 으로 이동하는 버튼 -> 복용하시는 약을 등록해주세요
         medLstLayout = findViewById(R.id.medLstLayout)  // 복용 체크리스트가 표시될 레이아웃
@@ -54,6 +57,20 @@ class MedLstPage : AppCompatActivity() {
         btnBckToMain.setOnClickListener {
             val intent = Intent(this, MainPage::class.java)
             startActivity(intent)
+        }
+
+        btnInitMed.setOnClickListener {
+            dbManager = DBManager(this, "mediTBL", null, 1)
+            sqlitedb = dbManager.readableDatabase
+
+            dbManager.onUpgrade(sqlitedb, 1, 2)
+            medLstLayout.removeAllViews()
+
+            Toast.makeText(this@MedLstPage, "복약 체크리스트가 전부 삭제되었습니다!", Toast.LENGTH_SHORT).show()
+
+            sqlitedb.close()
+            dbManager.close()
+
         }
 
         // 실행일 기준 무슨 요일인지 가져오는 함수 호출 -> todayDayOfWeek 변수에 저장

@@ -13,8 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/btnBckToMain"
@@ -90,8 +90,8 @@
     <!-- CheckBox(복약 체크리스트)가 계속 화면에 추가되므로 ScrollView 추가 -->
     <ScrollView
         android:id="@+id/medScrollView"
-        android:layout_width="373dp"
-        android:layout_height="493dp"
+        android:layout_width="365dp"
+        android:layout_height="435dp"
         android:layout_gravity="center"
         android:layout_margin="10dp">
 
@@ -101,14 +101,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+        </LinearLayout>
     </ScrollView>
 
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btnInitMed"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:button="@android:color/transparent"
-        android:text="CheckBox" />
+        android:layout_gravity="bottom|end"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/btn_color"
+        android:fontFamily="@font/rubiks"
+        android:text="전체삭제"
+        android:textColor="@color/navy" />
 
 </LinearLayout>

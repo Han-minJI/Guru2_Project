@@ -283,14 +283,15 @@
             android:layout_margin="20dp"
             android:background="@drawable/rectangle3"
             android:hint="오전 8:00"
-            android:textColor="@color/text_color2"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            android:textColor="@color/text_color2"
+            android:focusable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
