@@ -6,8 +6,9 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Switch
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import java.text.SimpleDateFormat
@@ -15,7 +16,7 @@ import java.text.SimpleDateFormat
 class MedRegPage : AppCompatActivity() {
     lateinit var edtMedName : EditText          // 복용약 입력하는 EditText
 
-    lateinit var switchDayOfWeek : Switch       // 모든 요일 선택하는 Swtich 버튼
+    lateinit var switchDayOfWeek : SwitchCompat       // 모든 요일 선택하는 Swtich 버튼
     lateinit var cGroupDayOfWeek : ChipGroup    // 각각의 요일 선택하는 Chip 그룹
 
     // 각각의 요일 Chip 버튼 (일요일 ~ 토요일)
@@ -29,7 +30,7 @@ class MedRegPage : AppCompatActivity() {
 
     lateinit var edtMedTime : EditText      // 시간 입력 EditText
 
-    lateinit var btnMedReg : Button         // 복약 등록 버튼 -> 클릭 시 <MedLstPage - 복약 리스트> 화면으로 이동
+    lateinit var btnMedReg : ImageButton         // 복약 등록 버튼 -> 클릭 시 <MedLstPage - 복약 리스트> 화면으로 이동
 
     // !!! DB 클래스 만들고 여기 안에 주석 해제 !!!
 
@@ -61,7 +62,7 @@ class MedRegPage : AppCompatActivity() {
         chipSat = findViewById(R.id.chipSat)
 
         edtMedTime = findViewById(R.id.edtMedTime)          // 시간 입력 EditText
-        btnMedReg = findViewById<Button>(R.id.btnMedReg)    // 복약 등록 버튼
+        btnMedReg = findViewById(R.id.btnMedReg)    // 복약 등록 버튼
 
         // "매일" Swtich 버튼의 Check 상태가 바뀌면 (사용자가 클릭을 하면)
         switchDayOfWeek.setOnCheckedChangeListener { CompoundButton, onSwitch ->

@@ -71,11 +71,11 @@ class MedLstPage : AppCompatActivity() {
 //        //// "mon twu wed thur fri sat" 가 저장된 레코드도 조건에 부합함 -> 얘도 읽어오면 됨.
 //
 //
-//        // 위에 선언한 가변 리스트들 초기화
-//        medNameLst = mutableListOf()
-//        medTimeLst = mutableListOf()
-//        medDayOfWeekLst = mutableListOf()
-//        medCheckBoxLst = mutableListOf()
+        // 위에 선언한 가변 리스트들 초기화
+        medNameLst = mutableListOf()
+        medTimeLst = mutableListOf()
+        medDayOfWeekLst = mutableListOf()
+        medCheckBoxLst = mutableListOf()
 //
 //
 //        while (cursor.moveToNext()) {

@@ -32,7 +32,7 @@ class MainPage : AppCompatActivity() {
 
         //복약 체크하기 버튼 클릭시 복약 체크하기 화면으로 넘어가기
         medCheckBtn.setOnClickListener {
-            val intent=Intent(this,MedRegPage::class.java)
+            val intent=Intent(this,MedLstPage::class.java)
             startActivity(intent)
         }
 
