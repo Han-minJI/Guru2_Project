@@ -26,7 +26,7 @@ class MyPage : AppCompatActivity() {
         userTypeTextView = findViewById(R.id.userTypeTextView)
         userBirthTextView = findViewById(R.id.userBirthTextView)
 
-        dbManager = DBManager(this, "userDB", null, 7)  //버전 6으로 통일 , 생년월일 추가하면 버전 7까지 버전 올라갈 것 같음
+        dbManager = DBManager(this, "userDB", null, 8)  //버전 6으로 통일 , 생년월일 추가하면 버전 7까지 버전 올라갈 것 같음
 
         // 디버깅: 세션 데이터 출력
         val sessionCursor: Cursor = dbManager.readableDatabase.rawQuery("SELECT * FROM session", null)

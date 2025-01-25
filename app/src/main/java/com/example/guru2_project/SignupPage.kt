@@ -62,7 +62,7 @@ class SignupPage : AppCompatActivity() {
 
 
 
-        dbManager = DBManager(this, "userDB", null, 7)
+        dbManager = DBManager(this, "userDB", null, 8)
 
         // Spinner 데이터 설정
         val types = listOf("당뇨병 전단계", "제1형 당뇨병", "제2형 당뇨병")
