@@ -143,81 +143,43 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/switchDayOfWeek"
-            app:singleLine="true"
-            app:checkedChip="@color/navy">
+            app:layout_constraintTop_toBottomOf="@+id/switchDayOfWeek">
 
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipSun"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="일"
-                android:textColor="@color/text_color2"
-                app:chipSurfaceColor="#33FEFDFC"
-                app:rippleColor="#344FA0" />
+                style="@style/med_reg_chip_theme"  />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipMon"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="월"
-                android:textColor="@color/text_color2"
-                app:chipSurfaceColor="#33FEFDFC"
-                app:rippleColor="#344FA0" />
+                style="@style/med_reg_chip_theme"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipTue"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="화"
-                android:textColor="@color/text_color2"
-                app:chipSurfaceColor="#33FEFDFC"
-                app:rippleColor="#344FA0" />
+                style="@style/med_reg_chip_theme" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipWed"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="수"
-                android:textColor="@color/text_color2"
-                app:chipSurfaceColor="#33FEFDFC"
-                app:rippleColor="#344FA0" />
+                style="@style/med_reg_chip_theme" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipThur"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="목"
-                android:textColor="@color/text_color2"
-                app:chipSurfaceColor="#33FEFDFC"
-                app:rippleColor="#344FA0" />
+                style="@style/med_reg_chip_theme"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipFri"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="금"
-                android:textColor="@color/text_color2"
-                app:chipSurfaceColor="#33FEFDFC"
-                app:rippleColor="#344FA0" />
+                style="@style/med_reg_chip_theme" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipSat"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="토"
-                android:textColor="@color/text_color2"
-                app:chipSurfaceColor="#33FEFDFC"
-                app:rippleColor="#344FA0" />
-
+                style="@style/med_reg_chip_theme"/>
         </com.google.android.material.chip.ChipGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -229,29 +191,6 @@
         android:background="@drawable/line1"
         tools:layout_editor_absoluteX="31dp"
         tools:layout_editor_absoluteY="293dp" />
-
-    <!--    <TextView-->
-<!--        android:id="@+id/medTimeTxt"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:fontFamily="@font/pretendardvariable"-->
-<!--        android:gravity="top"-->
-<!--        android:text="몇 시에 드시는 약인가요?"-->
-<!--        android:textColor="@color/white_smoke"-->
-<!--        android:textSize="20sp"-->
-<!--        tools:layout_editor_absoluteX="38dp"-->
-<!--        tools:layout_editor_absoluteY="425dp" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/edtMedTime"-->
-<!--        android:layout_width="331dp"-->
-<!--        android:layout_height="55dp"-->
-<!--        android:background="@drawable/rectangle3"-->
-<!--        android:hint="시간 선택"-->
-<!--        android:paddingLeft="20dp"-->
-<!--        android:paddingRight="20dp"-->
-<!--        tools:layout_editor_absoluteX="40dp"-->
-<!--        tools:layout_editor_absoluteY="461dp" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -328,66 +267,3 @@
 
 
 </LinearLayout>
-
-
-    <!--    <Button-->
-    <!--        android:id="@+id/btnMedReg"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="등록하기"-->
-    <!--        tools:layout_editor_absoluteX="162dp"-->
-    <!--        tools:layout_editor_absoluteY="601dp" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/edtMedTime"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="시간 선택"-->
-    <!--        android:inputType="text"-->
-    <!--        tools:layout_editor_absoluteX="46dp"-->
-    <!--        tools:layout_editor_absoluteY="474dp" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/medTimeTxt"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="몇 시에 드시는 약인가요?"-->
-    <!--        tools:layout_editor_absoluteX="46dp"-->
-    <!--        tools:layout_editor_absoluteY="435dp" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/medNameTxt"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="5dp"-->
-    <!--        android:layout_marginBottom="15dp"-->
-    <!--        android:text="어떤 약을 드시나요?"-->
-    <!--        app:layout_constraintBottom_toTopOf="@+id/edtMedName"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/edtMedName" />-->
-
-    <!--    <EditText-->
-    <!--        android:id="@+id/edtMedName"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="96dp"-->
-    <!--        android:ems="10"-->
-    <!--        android:hint="약 이름 입력"-->
-    <!--        android:inputType="text"-->
-    <!--        android:padding="15dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.178"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/medNameTxt"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-
-    <!--    -->
-    <!--    <TextView-->
-    <!--        android:id="@+id/dayOfWeekTxt"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="52dp"-->
-    <!--        android:layout_marginTop="62dp"-->
-    <!--        android:text="요일을 선택해주세요"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/edtMedName" />-->

@@ -1,24 +1,29 @@
 package com.example.guru2_project
 
 import android.content.Intent
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.view.WindowManager.LayoutParams
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import java.time.LocalDate
 import java.util.Calendar
 
 class MedLstPage : AppCompatActivity() {
-    lateinit var btnBckToMain : ImageButton
-    lateinit var btnInitMed : Button
+    lateinit var btnBckToMain : ImageButton // 메인 화면 이동 Button
+    lateinit var btnInitMed : Button // 체크리스트 전체 삭제 Button
 
-    // "복용하시는 약을 등록해주세요" -> MedRegPage(복약 등록) 페이지로 이동 위한 버튼
+    // "복용하시는 약을 등록해주세요" -> MedRegPage(복약 등록) 페이지로 이동 위한 Button
     lateinit var btnToMedReg : ImageButton
 
     lateinit var medLstLayout : LinearLayout // 복약 리스트(CheckBox)가 나열될 LinearLayout
@@ -34,11 +39,11 @@ class MedLstPage : AppCompatActivity() {
     lateinit var medDayOfWeekLst : MutableList<String>  // mediTBL(복약 테이블)의 medi_day_of_week 필드의 값만 저장한 가변 리스트
     lateinit var medCheckBoxLst : MutableList<CheckBox> // 화면에 표시될 복약 CheckBox를 담을 가변 리스트
 
-    var mediNum: Int = 0
+    var mediNum: Int = 0                // mediTBL의 medi_num (PRIMARY KEY) 필드의 값을 가져올 변수
     lateinit var medName: String        // medNameLst에 원소를 추가하기 위해 필요한 변수
     lateinit var medTime: String        // medTimeLst에 원소를 추가하기 위해 필요한 변수
     lateinit var medDayOfWeek: String   // medDayOfWeekLst에 원소를 추가하기 위해 필요한 변수
-    lateinit var medDate: String
+    lateinit var medDate: String        // 사용자가 각각의 체크박스를 마지막으로 클릭한 시점을 저장할 변수
     var medCheck: Int? = null
 
     lateinit var todayDayOfWeek: String // 실행한 시간의 요일 -> 복약 리스트에 오늘 요일에 해당하는 CheckBox만 표시해주기 위해 필요한 변수
@@ -54,124 +59,39 @@ class MedLstPage : AppCompatActivity() {
         btnToMedReg = findViewById(R.id.btnToMedReg)    // MedRegPage (복용약 등록 화면) 으로 이동하는 버튼 -> 복용하시는 약을 등록해주세요
         medLstLayout = findViewById(R.id.medLstLayout)  // 복용 체크리스트가 표시될 레이아웃
 
-        btnBckToMain.setOnClickListener {
-            val intent = Intent(this, MainPage::class.java)
-            startActivity(intent)
-        }
+        // 화면에 표시되어있던 체크리스트를 우선 없애고 시작
+        onResume()
 
-        btnInitMed.setOnClickListener {
-            dbManager = DBManager(this, "mediTBL", null, 1)
-            sqlitedb = dbManager.readableDatabase
-
-            dbManager.onUpgrade(sqlitedb, 1, 2)
-            medLstLayout.removeAllViews()
-
-            Toast.makeText(this@MedLstPage, "복약 체크리스트가 전부 삭제되었습니다!", Toast.LENGTH_SHORT).show()
-
-            sqlitedb.close()
-            dbManager.close()
-
-        }
-
-        // 실행일 기준 무슨 요일인지 가져오는 함수 호출 -> todayDayOfWeek 변수에 저장
-        todayDayOfWeek = getDayOfWeek().toString()
-
-        // DB 사용을 위해 DBManger 객체 생성 (mediTBL - 복약 테이블)
-        dbManager = DBManager(this, "mediTBL", null, 1)
-        sqlitedb = dbManager.writableDatabase
-
-        var cursor: Cursor
-
-        // medi_day_of_week(약 먹을 요일) 필드의 값 == "오늘 요일(실행일 기준)"인 레코드만 필터링
-        cursor = sqlitedb.rawQuery(
-            "SELECT * FROM mediTBL where medi_day_of_week like '%" + todayDayOfWeek + "%';",
-            null
-        )
-
-        //// 위의 코드에서 rawQuery를 이해하기 위해 하단에 예시 서술함.
-        //// medi_day_of_week 필드에 "mon twu wed thur fri sat" 이라는 String 값이 저장되어 있으며,
-        //// todayDayOfWeek = "mon", 즉 앱을 실행한 날짜의 요일이 월요일이면,
-        //// "mon twu wed thur fri sat" 가 저장된 레코드도 조건에 부합함 -> 얘도 읽어오면 됨.
-
-        // 위에 선언한 가변 리스트들 초기화
-        medNameLst = mutableListOf()
-        medTimeLst = mutableListOf()
-        medDayOfWeekLst = mutableListOf()
-        medCheckBoxLst = mutableListOf()
-
-        while (cursor.moveToNext()) {
-            // 필터링한 결과 읽은 레코드 중 특정 필드의 값 -> 변수에 저장
-            mediNum = cursor.getInt(cursor.getColumnIndexOrThrow("medi_num")) // medi_name 필드 값 -> medName
-            medName = cursor.getString(cursor.getColumnIndexOrThrow("medi_name")) // medi_name 필드 값 -> medName
-            medTime = cursor.getString(cursor.getColumnIndexOrThrow("medi_time")) // medi_time 필드 값 -> medTime
-            medDayOfWeek = cursor.getString(cursor.getColumnIndexOrThrow("medi_day_of_week")) // medi_day_of_week 필드 값 -> medDayOfWeek
-            medDate = cursor.getString(cursor.getColumnIndexOrThrow("medi_date")) // medi_date 필드 값 -> medDayOfWeek
-            medCheck = cursor.getInt(cursor.getColumnIndexOrThrow("medi_check")) // medi_check 필드 값 -> medDayOfWeek
-
-            medNameLst.add(medName)             // medName에 저장된 값 -> <복용약 이름 리스트>에 추가
-            medTimeLst.add(medTime)             // medTime 저장된 값 -> <복약 예정 시간 리스트>에 추가
-            medDayOfWeekLst.add(medDayOfWeek)   // medDayOfWeek 저장된 값 -> <복약 예정 요일 리스트>에 추가
-
-
-            val checkBox = CheckBox(this).apply {    // CheckBox 객체 생성
-                isChecked = (medCheck == 1 && medDate == LocalDate.now().toString())
-
-                background = ContextCompat.getDrawable(context, R.drawable.med_lst_checkbox_selector)
-                buttonDrawable = null
-
-                text = "$medName\n$medTime" // 해당 CheckBox 객체의 text -> "복용약 이름 (줄바꿈) 복약 예정 시간" 으로 세팅
-                setPadding(50, 0, 0, 0)
-
-                // 체크 상태 변경 리스너
-                setOnCheckedChangeListener { _, isChecked ->
-                    dbManager = DBManager(this.context, "mediTBL", null, 1)
-                    sqlitedb = dbManager.writableDatabase
-
-                    if (isChecked) {
-                        sqlitedb.execSQL(
-                            "UPDATE mediTBL SET medi_date = '" + LocalDate.now()
-                                .toString() + "', medi_check = 1 WHERE medi_num = '" + mediNum + "';"
-                        )
-
-                    } else {
-                        sqlitedb.execSQL(
-                            "UPDATE mediTBL SET medi_date = '" + LocalDate.now()
-                                .toString() + "', medi_check = 0 WHERE medi_num = '" + mediNum + "';"
-                        )
-                    }
-                    // CheckBox 상태에 따라 배경 변경
-                    background = ContextCompat.getDrawable(context, R.drawable.med_lst_checkbox_selector)
-                }
-            }
-            medCheckBoxLst.add(checkBox)    // 복약 CheckBox 리스트에 해당 CheckBox 객체 추가
-            medLstLayout.addView(checkBox)  // 복약 CheckBox가 쭉 표시될 레이아웃에 해당 CheckBox 객체 addView(동적으로 추가)
-
-
-            // 오늘 요일에 해당하지 않는 체크리스트는 목록에서 삭제
-            // removeView를 하면 인덱스가 바뀌므로 IndexOutOfBoundsException 방지를 위해 역순으로 체크
-            for (i in medCheckBoxLst.indices.reversed()) { // 현재 화면 상에 나타난 CheckBox의 개수만큼 반복
-                val checkBox = medCheckBoxLst[i]
-                val medDayOfWeek = medDayOfWeekLst[i]
-
-                if (medDayOfWeek.contains(todayDayOfWeek) == false) { // 현재 화면 상에 나타난 CheckBox가 오늘 요일(앱 실행일 기준)에 해당하지 않는다면
-                    medLstLayout.removeView(checkBox)                 // 화면에서 해당 CheckBox 삭제
-
-                    // 앞서 원소를 추가해주었던 가변 리스트에서도 삭제해줌.
-                    medCheckBoxLst.removeAt(i)
-                    medNameLst.removeAt(i)
-                    medTimeLst.removeAt(i)
-                    medDayOfWeekLst.removeAt(i)
-                }
-            }
-        }
         btnToMedReg.setOnClickListener { // "복용하시는 약을 등록해주세요" 버튼 클릭 시
             // MedRegPage(복약 등록 화면)으로 Intent 전달하며 화면 전환
             var intent = Intent(this, MedRegPage::class.java)
             startActivity(intent)
         }
-        cursor.close()
-        sqlitedb.close()
-        dbManager.close()
+
+        btnBckToMain.setOnClickListener { // 이전 아이콘 버튼 클릭 시
+            // MainPage(메인 화면)으로 Intent 전달하며 화면 전환
+            val intent = Intent(this, MainPage::class.java)
+            startActivity(intent)
+        }
+
+        btnInitMed.setOnClickListener { // 전체 삭제 버튼 클릭 시
+            var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
+
+            // 값을 읽어오기만 할 것이므로 읽기 전용으로 DB 열기
+            dbManager = DBManager(this, "userDB", null, 7)
+            sqlitedb = dbManager.readableDatabase
+
+            // mediTBL에서 레코드 삭제 (user_id 필드의 값 == 현재 로그인한 사용자의 ID인 경우에만)
+            sqlitedb.execSQL("DELETE FROM mediTBL WHERE user_id = '" + nowUserID + "';")
+            medLstLayout.removeAllViews() // 레이아웃에서도 모든 View 객체 지우기
+
+            // 복약 체크리스트가 삭제되었다는 토스트 메시지 출력
+            Toast.makeText(this@MedLstPage, "복약 체크리스트 전체 삭제됨", Toast.LENGTH_SHORT).show()
+
+            sqlitedb.close()
+            dbManager.close()
+
+        }
     }
 
     // 오늘 무슨 요일인지 가져오는 함수
@@ -196,5 +116,130 @@ class MedLstPage : AppCompatActivity() {
             todayDayOfWeek = "sat"
         }
         return todayDayOfWeek // 오늘 무슨 요일인지 반환
+    }
+
+    // 다시 앱으로 돌아왔을 때 호출되는 함수 재정의
+    override fun onResume() {
+        super.onResume()
+
+        // <화면 새로고침한 뒤, 복약 CheckBox 동적으로 추가> 함수 호출
+        refreshMedList()
+    }
+
+    // 복약 체크리스트 하나씩 추가하는 함수
+    private fun refreshMedList() {
+        medLstLayout.removeAllViews() // 우선, 해당 레이아웃에서 모든 뷰 삭제 후 진행
+
+        var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
+
+        // 값을 Update해야 하므로 쓰기 전용으로 DB 열기
+        dbManager = DBManager(this, "userDB", null, 7)
+        sqlitedb = dbManager.writableDatabase
+
+        todayDayOfWeek = getDayOfWeek().toString() // 오늘 요일 알아내는 함수 호출
+
+        // mediTBL(복약 등록 테이블)의 값을 업데이트 (현재 로그인한 사용자와 관련된 레코드만)
+        // <하루가 지난 상태>인 경우 -> [medi_check] 필드 값을 0으로, [medi_date] 필드 값을 오늘 날짜로 업데이트
+        // 하루가 지나면 체크된 체크박스도 전부 초기화해줘야 함. 그럴려면 마지막으로 앱을 실행한 날짜를 알아야함
+        // 따라서 medi_date 필드에 지금 현재 앱을 실행한 날짜를 주기적으로 기록해주는 것.
+        sqlitedb.execSQL("UPDATE mediTBL SET medi_check = 0 WHERE medi_date != '${LocalDate.now()}' AND user_id = '$nowUserID';")
+        sqlitedb.execSQL("UPDATE mediTBL SET medi_date = '${LocalDate.now()}' WHERE medi_date != '${LocalDate.now()}' AND user_id = '$nowUserID';")
+
+        // 사용자 ID가 동일하며, 앱을 실행한 요일이 포함된 체크리스트만 읽어옴
+        val cursor = sqlitedb.rawQuery(
+            "SELECT * FROM mediTBL WHERE medi_day_of_week LIKE '%$todayDayOfWeek%' AND user_id = '$nowUserID';",
+            null
+        )
+
+        // mediTBL(테이블)의 각각의 필드의 값을 저장할 가변 리스트 초기화
+        medNameLst = mutableListOf()
+        medTimeLst = mutableListOf()
+        medDayOfWeekLst = mutableListOf()
+        medCheckBoxLst = mutableListOf()
+
+        while (cursor.moveToNext()) {
+            // 테이블의 각각의 필드의 값을 우선 변수에 저장
+            mediNum = cursor.getInt(cursor.getColumnIndexOrThrow("medi_num"))
+            medName = cursor.getString(cursor.getColumnIndexOrThrow("medi_name"))
+            medTime = cursor.getString(cursor.getColumnIndexOrThrow("medi_time"))
+            medDate = cursor.getString(cursor.getColumnIndexOrThrow("medi_date"))
+            medCheck = cursor.getInt(cursor.getColumnIndexOrThrow("medi_check"))
+
+
+            // CheckBox 객체를 동적으로 추가하여 속성 적용
+            val checkBox = CheckBox(this).apply {
+                // checkBox의 text 값에 들어갈 spannable
+                val spannable = SpannableString("$medName\n$medTime") // medName은 복약 이름, medTime은 복약 예정 시간
+                spannable.setSpan(StyleSpan(Typeface.BOLD), 0, medName.length, 0) // 복약 이름은 Bold체로 표시
+                spannable.setSpan(AbsoluteSizeSpan(80), 0, medName.length, 0) // 복약 이름은 80px로 지정
+
+                // 복약 예정 시간의 text color와 padding 설정
+                spannable.setSpan(ForegroundColorSpan(Color.parseColor("#272D4F")), medName.length + 1, spannable.length, 0)
+                spannable.setSpan(setPadding(20,0,0,0), medName.length + 1, spannable.length, 0)
+
+                text = spannable // text에 들어갈 내용을 담은 spannable을 text로 넘겨줌
+                buttonDrawable = null // checkBox 아이콘은 표시하지 않음
+
+                setPadding(100, 0, 0, 0) // checkBox의 padding 설정
+
+                // checkBox의 체크 속성 설정 - 사용자가 체크를 했으며, 오늘 체크를 한 경우에만 체크 상태 유지
+                isChecked = (medCheck == 1 && medDate == LocalDate.now().toString())
+                setBackgroundResource(R.drawable.med_lst_checkbox_selector) // 체크 여부에 따른 backGround 이미지 변경
+
+                // 체크 상태가 변경된 경우(즉, 사용자가 체크박스를 클릭한 경우) 이벤트 처리
+                setOnCheckedChangeListener { _, isChecked ->
+                    updateMediCheck(mediNum, isChecked) // DB의 mediTBL에 check 여부를 저장하는 함수 호출
+                }
+                val params = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT) // checkBox를 담을 레이아웃 높이와 너비 지정
+                // 아래쪽 여백 (체크 박스 간의 위아래 간격 조정을 위해 위쪽 여백&아래쪽 여백 설정
+                params.topMargin = 20
+                params.bottomMargin = 20
+                layoutParams = params
+            }
+            medCheckBoxLst.add(checkBox) // 복약 체크리스트에 해당 체크박스 추가
+            medLstLayout.addView(checkBox) // 화면에 해당 체크박스 추가하여 보여줌
+        }
+        cursor.close()
+        sqlitedb.close()
+        dbManager.close()
+    }
+
+    // DB의 mediTBL에 check 여부를 저장하는 함수
+    private fun updateMediCheck(mediNum: Int, isChecked: Boolean) {
+        var nowUserID = getCurrentUserId() // 현재 로그인한 사용자 ID 가져오기
+
+        // 값을 업데이트해야 하므로 읽기 전용으로 DB 열기
+        dbManager = DBManager(this, "userDB", null, 7)
+        val sqlitedb = dbManager.writableDatabase
+
+        // 이미 닫힌 DB를 reopen 하는 에러를 방지하기 위해 try-catch-finally로 작성
+        try { //
+            sqlitedb.execSQL(
+                "UPDATE mediTBL SET medi_check = ${if (isChecked) 1 else 0} WHERE medi_num = '$mediNum' AND user_id = '$nowUserID';"
+            )
+        } catch (e: Exception) { // 예외 처리
+            e.printStackTrace()
+        } finally { // 무조건 실행 -> DB 닫기
+            sqlitedb.close()
+            dbManager.close()
+        }
+    }
+
+    // 현재 로그인한 사용자 ID 가져오는 함수
+    private fun getCurrentUserId(): String? {
+        var userId: String? = null // 로그인 사용자 ID를 저장할 변수
+
+        // 값을 가져오기만 할 것이므로 읽기 전용으로 DB 열기
+        dbManager = DBManager(this, "userDB", null, 7)
+        val sqlitedb = dbManager.readableDatabase
+
+        val cursorId = sqlitedb.rawQuery("SELECT * FROM session;", null) // session 테이블 값 읽어오기
+        if (cursorId.moveToFirst()) {
+            userId = cursorId.getString(cursorId.getColumnIndexOrThrow("userId")) // userID에 현재 로그인한 사용자의 ID 저장
+        }
+        cursorId.close()
+        sqlitedb.close()
+
+        return userId // 가져온 로그인 사용자 ID 리턴
     }
 }
