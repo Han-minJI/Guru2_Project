@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 복약 등록 화면의 칩 선택 여부와 대응하는 컬러 지정 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/med_reg_chip_check" android:state_checked="true"/>
+    <item android:color="@color/med_reg_chip_uncheck" android:state_checked="false"/>
+</selector>

@@ -22,4 +22,8 @@
     <color name="calender_color_blue">#6DA4FF</color>
     <color name="enabled_date_color">#D7D7D9</color>
 
+    <!-- 복약 등록 화면의 칩 선택 파트 컬러 지정 -->
+    <color name="med_reg_chip_check">#344FA0</color>
+    <color name="med_reg_chip_uncheck">#33FEFDFC</color>
+    <color name="med_chip_text_color">#F5F5F5</color>
 </resources>
