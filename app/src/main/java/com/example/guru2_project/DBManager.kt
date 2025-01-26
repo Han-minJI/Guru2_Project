@@ -39,6 +39,18 @@ class DBManager(context: Context?,
         )
 
         db!!.execSQL("CREATE TABLE clinicRecord(userId TEXT, date TEXT, reason TEXT)")
+
+        // 생활 습관 체크 테이블 --> 나의 생활 체크 등록하기 버튼 클릭 시 생성
+        db?.execSQL("CREATE TABLE habitTBL (" +
+                "habit_num INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "user_id TEXT, " +
+                "habit_name TEXT, " +
+                "habit_day_of_week TEXT," +
+                "habit_time TEXT," +
+                "habit_date TEXT," +
+                "habit_content TEXT," +
+                "habit_check INTEGER)"
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
