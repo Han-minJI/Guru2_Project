@@ -12,8 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GURU2_DANO"
         tools:targetApi="31">
-        
-        <activity android:name=".ClinicRecord"/>
+        <activity
+            android:name=".HabLstPage"
+            android:exported="false" />
+        <activity
+            android:name=".HabRegPage"
+            android:exported="false" />
+        <activity android:name=".ClinicRecord" />
         <activity
             android:name=".SussessPage"
             android:exported="false" />
