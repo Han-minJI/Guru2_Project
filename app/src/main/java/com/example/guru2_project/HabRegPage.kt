@@ -157,7 +157,7 @@ class HabRegPage : AppCompatActivity() {
 
             // !!! DBManager에 코드 추가 -> 버전 업글 -> 주석 해제 !!!
             // DB 읽기 전용으로 불러오기
-            dbManager = DBManager(this, "userDB", null, 10)
+            dbManager = DBManager(this, "userDB", null, 11)
             sqlitedb = dbManager.readableDatabase
 
             // session 테이블에서 현재 로그인한 사용자의 ID 가져오기
@@ -169,7 +169,7 @@ class HabRegPage : AppCompatActivity() {
             cursor.close()
 
             // DB 쓰기 전용으로 불러오기 (등록할 때 값을 Insert 해야 하므로)
-            dbManager = DBManager(this, "userDB", null, 10)
+            dbManager = DBManager(this, "userDB", null, 11)
             sqlitedb = dbManager.writableDatabase
 
             // mediTBL에 사용자가 입력한 (약 이름, 선택 요일, 선택 시간)을 저장
