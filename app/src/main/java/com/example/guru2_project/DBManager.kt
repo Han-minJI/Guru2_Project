@@ -37,12 +37,15 @@ class DBManager(context: Context?,
                 "medi_date TEXT," +
                 "medi_check INTEGER)"
         )
+
+        db!!.execSQL("CREATE TABLE clinicRecord(date TEXT, reason TEXT)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS member")
         db?.execSQL("DROP TABLE IF EXISTS session")
         db?.execSQL("DROP TABLE IF EXISTS mediTBL") // 복약 체크 테이블
+        db?.execSQL("DROP TABLE IF EXISTS clinicRecord")
         onCreate(db)
     }
 }

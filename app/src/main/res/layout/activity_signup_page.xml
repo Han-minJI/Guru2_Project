@@ -15,10 +15,11 @@
             android:id="@+id/some_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
             android:background="#272D4F"
             android:clipToOutline="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="16dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
 
             <!-- Auto layout, variables, and unit scale are not yet supported -->

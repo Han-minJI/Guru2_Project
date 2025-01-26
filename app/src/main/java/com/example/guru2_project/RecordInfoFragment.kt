@@ -1,5 +1,6 @@
 package com.example.guru2_project
 
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.FrameStats
@@ -57,6 +58,12 @@ class RecordInfoFragment : Fragment() {
     private lateinit var drugChangeBtn: ImageButton
     private lateinit var showCloseBtn: ImageButton
 
+    //DB 매니저/sqlitedb 초기화
+    private lateinit var dbManager: DBManager
+    private lateinit var sqlitedb: SQLiteDatabase
+
+    private lateinit var reason:String // 병원 방문 목적
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -76,6 +83,10 @@ class RecordInfoFragment : Fragment() {
         val year=arguments?.getInt("year")
         val month=arguments?.getInt("month")
         val day=arguments?.getInt("day")
+        val dateInsert = String.format("%04d-%02d-%02d", year, month, day) // db 입력 날짜
+
+        dbManager = DBManager(requireContext(), "userDB", null, 9)
+
 
         // 내원일 입력하기 버튼
         showAllLayout=view.findViewById(R.id.showAllLayout)
@@ -124,6 +135,13 @@ class RecordInfoFragment : Fragment() {
             showAllTv.setText(drugShowTv.text.toString())
             showtodaysc.visibility=View.VISIBLE
             drugInsertBtn_fl.visibility=View.GONE
+
+            reason=drugShowTv.text.toString() // 방문 목적 가져올 변수
+
+            sqlitedb=dbManager.writableDatabase
+            sqlitedb.execSQL("INSERT INTO clinicRecord VALUES('"+dateInsert+"','"+reason+"');")
+            sqlitedb.close()
+            Log.d("$dateInsert"+"$reason","db입력 확인")
         }
 
         return view

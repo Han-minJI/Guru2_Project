@@ -78,7 +78,7 @@ class MedLstPage : AppCompatActivity() {
             var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
 
             // 값을 읽어오기만 할 것이므로 읽기 전용으로 DB 열기
-            dbManager = DBManager(this, "userDB", null, 8)
+            dbManager = DBManager(this, "userDB", null, 9)
             sqlitedb = dbManager.readableDatabase
 
             // mediTBL에서 레코드 삭제 (user_id 필드의 값 == 현재 로그인한 사용자의 ID인 경우에만)

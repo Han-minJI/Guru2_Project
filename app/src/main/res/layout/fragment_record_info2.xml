@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecordInfoFragment2"
+    android:orientation="vertical"
+    android:background="#272D4F">
+
+    <LinearLayout
+        android:id="@+id/showtodaysc2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="오늘의 일정은"
+            android:fontFamily="@font/pretendardvariable"
+            android:textColor="@color/white"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="35dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:id="@+id/showAllTv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:background="@drawable/edittext_custom"
+            android:layout_marginRight="25dp"
+            android:layout_marginLeft="25dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/pretendardvariable"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/text_color"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
