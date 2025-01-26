@@ -85,7 +85,7 @@ class RecordInfoFragment : Fragment() {
         val day=arguments?.getInt("day")
         val dateInsert = String.format("%04d-%02d-%02d", year, month, day) // db 입력 날짜
 
-        dbManager = DBManager(requireContext(), "userDB", null, 9)
+        dbManager = DBManager(requireContext(), "userDB", null, 10)
 
 
         // 내원일 입력하기 버튼
@@ -138,8 +138,21 @@ class RecordInfoFragment : Fragment() {
 
             reason=drugShowTv.text.toString() // 방문 목적 가져올 변수
 
+            var nowUserID = "" // 현재 사용자 ID를 저장할 변수
+
+            // DB 읽기 전용으로 불러오기
+            sqlitedb = dbManager.readableDatabase
+
+            // session 테이블에서 현재 로그인한 사용자의 ID 가져오기
+            val cursor = sqlitedb.rawQuery("SELECT * FROM session;", null)
+
+            while (cursor.moveToNext()) {
+                nowUserID = cursor.getString(cursor.getColumnIndexOrThrow("userId"))
+            }
+            cursor.close()
+
             sqlitedb=dbManager.writableDatabase
-            sqlitedb.execSQL("INSERT INTO clinicRecord VALUES('"+dateInsert+"','"+reason+"');")
+            sqlitedb.execSQL("INSERT INTO clinicRecord VALUES('"+nowUserID+"','"+dateInsert+"','"+reason+"');")
             sqlitedb.close()
             Log.d("$dateInsert"+"$reason","db입력 확인")
         }

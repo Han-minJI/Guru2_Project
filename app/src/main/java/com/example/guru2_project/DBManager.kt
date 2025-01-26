@@ -38,7 +38,7 @@ class DBManager(context: Context?,
                 "medi_check INTEGER)"
         )
 
-        db!!.execSQL("CREATE TABLE clinicRecord(date TEXT, reason TEXT)")
+        db!!.execSQL("CREATE TABLE clinicRecord(userId TEXT, date TEXT, reason TEXT)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

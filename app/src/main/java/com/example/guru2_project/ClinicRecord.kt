@@ -50,7 +50,7 @@ class ClinicRecord : AppCompatActivity(){
         val fragmentContainer: View = findViewById(R.id.fragmentContainer)
         val fragmentContainer2:View=findViewById(R.id.fragmentContainer2)// 두번째 프래그먼트
 
-        dbManager = DBManager(this, "userDB", null, 9)
+        dbManager = DBManager(this, "userDB", null, 10)
 
 
         //캘린더뷰에 데코레이터 추가
@@ -94,15 +94,27 @@ class ClinicRecord : AppCompatActivity(){
             val year = date.year
             val month = date.month
             val day = date.day
+            // DB 읽기 전용으로 불러오기
+            sqlitedb = dbManager.readableDatabase
+            var nowUserID = "" // 현재 사용자 ID를 저장할 변수
+
+
+            // session 테이블에서 현재 로그인한 사용자의 ID 가져오기
+            val idCursor = sqlitedb.rawQuery("SELECT * FROM session;", null)
+
+            while (idCursor.moveToNext()) {
+                nowUserID = idCursor.getString(idCursor.getColumnIndexOrThrow("userId"))
+            }
+            idCursor.close()
+
 
             // FrameLayout을 보이게 하고, 프래그먼트 삽입
             //캘린더 뷰 일정 불러오기
-            sqlitedb=dbManager.readableDatabase
-
             val dateInsert = String.format("%04d-%02d-%02d", year, month, day) // db 입력 날짜
             val cursor: Cursor
 
-            cursor=sqlitedb.rawQuery("SELECT reason FROM clinicRecord WHERE date = '$dateInsert';",null)
+            cursor=sqlitedb.rawQuery("SELECT reason FROM clinicRecord " +
+                    "WHERE userId='$nowUserID' and date = '$dateInsert';",null)
 
             if(cursor.moveToNext())
             {
