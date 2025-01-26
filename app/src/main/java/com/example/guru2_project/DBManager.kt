@@ -58,6 +58,7 @@ class DBManager(context: Context?,
         db?.execSQL("DROP TABLE IF EXISTS session")
         db?.execSQL("DROP TABLE IF EXISTS mediTBL") // 복약 체크 테이블
         db?.execSQL("DROP TABLE IF EXISTS clinicRecord")
+        db?.execSQL("DROP TABLE IF EXISTS habitTBL")
         onCreate(db)
     }
 }
