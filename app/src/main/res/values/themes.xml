@@ -91,5 +91,22 @@
         <item name="android:popupBackground">@drawable/spinner_background</item>
     </style>
 
+    <!-- 마이페이지 "아직 마치지 못한 일" TextView 스타일 -->
+    <style name="mypage_todo_title_theme">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/pretendardvariable</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- 마이페이지 todoList TextView 스타일 -->
+    <style name="mypage_todo_txt_theme">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:fontFamily">@font/pretendardvariable</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>
 

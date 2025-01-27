@@ -77,6 +77,27 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
+            <ScrollView
+                android:id="@+id/todoScrView"
+                android:layout_width="343dp"
+                android:layout_height="164dp"
+                android:background="@drawable/img_my_page_rect"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.56">
+
+                <LinearLayout
+                    android:id="@+id/todoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                </LinearLayout>
+            </ScrollView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
