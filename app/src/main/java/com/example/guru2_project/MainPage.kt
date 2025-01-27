@@ -27,10 +27,10 @@ class MainPage : AppCompatActivity() {
     lateinit var bloodRecordBtn:ImageButton // 혈당 기록하기 버튼
 
     // 혈당량 Bar 차트 관련 변수
-    lateinit var barChart: BarChart
-    lateinit var chartLayout: LinearLayout
-    lateinit var dbManager: DBManager
-    lateinit var sqlitedb: SQLiteDatabase
+    lateinit var barChart: BarChart // Bar 차트
+    lateinit var chartLayout: LinearLayout // Bar 차트가 담길 LinearLayout
+    lateinit var dbManager: DBManager // bloodRecord 테이블에서 혈당량 값을 가져오기 위해 필요함.
+    lateinit var sqlitedb: SQLiteDatabase // bloodRecord 테이블에서 혈당량 값을 가져오기 위해 필요함.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +42,9 @@ class MainPage : AppCompatActivity() {
         habitCheckBtn=findViewById(R.id.habitCheckBtn)
         bloodRecordBtn=findViewById(R.id.bloodRecordBtn)
 
-        // 혈당량 Bar 차트 관련 변수
-        barChart = findViewById(R.id.barChart)
-        chartLayout = findViewById(R.id.chartLayout)
+        // 혈당량 Bar 차트 관련 변수 -> 레이아웃 파일의 위젯 id와 연결
+        barChart = findViewById(R.id.barChart) // 혈당량 값이 표시될 Bar 차트
+        chartLayout = findViewById(R.id.chartLayout) // Bar 차트가 표시될 레이아웃
 
         //이미지 버튼 클릭시 마이페이지로 넘어가도록
         mypagebutton.setOnClickListener {
@@ -75,46 +75,48 @@ class MainPage : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 차트 관련 코드 하단에 쭉 기술함. -> 주석은 코드 분석 후 추가할 예정.
+        // 차트 관련 코드를 하단에 쭉 기술함.
         var entries = ArrayList<BarEntry>() // 차트 x, y 값 쌍을 저장할 BarEntry 선언 및 초기화
 
-        // 차트의 y축 값 선언 및 초기화
+        // 차트의 y축 값 선언 및 초기화 (y축 - 혈당량)
         var value1 = 0.0f ; var value2 = 0.0f ; var value3 = 0.0f ; var value4 = 0.0f
         var value5 = 0.0f ; var value6 = 0.0f ; var value7 = 0.0f ; var value8 = 0.0f
 
         var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
 
-        // !!! DB 연결 후 주석 해제 !!!
-        // 값을 가져오기만 할 것이므로 읽기 전용으로 DB 열기
+        // 혈당량 값을 가져오기만 할 것이므로 읽기 전용으로 DB 열기
         dbManager = DBManager(this, "userDB", null, 13)
         sqlitedb = dbManager.readableDatabase
 
-        // 사용자 ID가 동일하며, 앱을 실행한 요일이 포함된 체크리스트만 읽어옴
+        // 조건 -> 사용자 ID가 동일하며, 오늘 등록한 것
+        // 위 조건에 맞게 혈당량 값과 측정한 시간(공복 ~ 취침 전)을 가져옴
         val cursor = sqlitedb.rawQuery(
             "SELECT blood, bloodtime FROM bloodRecord WHERE date = '${LocalDate.now()}' AND userId = '$nowUserID';",
             null
         )
 
         while (cursor.moveToNext()) {
-            val bloodValue = cursor.getString(cursor.getColumnIndexOrThrow("blood")).toFloat()
-            val bloodTime = cursor.getString(cursor.getColumnIndexOrThrow("bloodtime"))
-            when(bloodTime) {
-                "공복" -> value1 = bloodValue
-                "아침 식전" -> value2 = bloodValue
-                "아침 식후" -> value3 = bloodValue
-                "점심 식전" -> value4 = bloodValue
-                "점심 식후" -> value5 = bloodValue
-                "저녁 식전" -> value6 = bloodValue
-                "저녁 식후" -> value7 = bloodValue
-                "취침 전" -> value8 = bloodValue
+            val bloodValue = cursor.getString(cursor.getColumnIndexOrThrow("blood")).toFloat() // 혈당량 값이 변수에 저장됨 -> 차트의 y축
+            val bloodTime = cursor.getString(cursor.getColumnIndexOrThrow("bloodtime")) // 혈당량 측정 시간이 변수에 저장됨 -> 차트의 x축
+            when(bloodTime) { // 혈당량 측정 시간을 보고 혈당량 값을 알맞게 대입
+                // <value1 ~ value8> 변수에 "공복 ~ 취침 전" 순서대로 혈당량 값이 각각 저장됨
+                "공복" -> value1 = bloodValue // "공복" 시간에 측정한 혈당량 저장
+                "아침 식전" -> value2 = bloodValue // "아침 식전" 시간에 측정한 혈당량 저장
+                "아침 식후" -> value3 = bloodValue // "아침 식후" 시간에 측정한 혈당량 저장
+                "점심 식전" -> value4 = bloodValue // "점심 식전" 시간에 측정한 혈당량 저장
+                "점심 식후" -> value5 = bloodValue // "점심 식후" 시간에 측정한 혈당량 저장
+                "저녁 식전" -> value6 = bloodValue // "저녁 식전" 시간에 측정한 혈당량 저장
+                "저녁 식후" -> value7 = bloodValue // "저녁 식후" 시간에 측정한 혈당량 저장
+                "취침 전" -> value8 = bloodValue // "취침 전" 시간에 측정한 혈당량 저장
             }
         }
         cursor.close()
         sqlitedb.close()
         dbManager.close()
-        // !!! DB 연결 후 주석 해제 !!!
 
-        // (x, y) 값 entries에 추가
+        // (x, y) 값이 Pair로 entries(차트 데이터)에 추가됨
+        // 1번째 매개변수 -> x : float 형태로 직접 지정
+        // 2번째 매개변수 -> y : value1 ~ value8 변수에 저장했던 값 넘겨줌
         entries.add(BarEntry(1.0f,value1))
         entries.add(BarEntry(2.0f,value2))
         entries.add(BarEntry(3.0f,value3))
@@ -125,79 +127,76 @@ class MainPage : AppCompatActivity() {
         entries.add(BarEntry(8.0f,value8))
 
         barChart.run {
-            barChartSet(this@MainPage, barChart)
-            barChartY(this@MainPage, barChart)
-            barChartX(this@MainPage, barChart)
+            barChartSet(this@MainPage, barChart) // 차트의 속성을 조정하는 함수 호출
+            barChartY(this@MainPage, barChart) // 차트의 Y축 설정하는 함수 호출
+            barChartX(this@MainPage, barChart) // 차트의 X축 설정하는 함수 호출
         }
 
-        var set = BarDataSet(entries,"DataSet")
-        set.color = ContextCompat.getColor(applicationContext!!,R.color.white)
+        var set = BarDataSet(entries,"DataSet") // 차트에 표시할 데이터인 entries, 범례는 "DataSet"
+        set.color = ContextCompat.getColor(applicationContext!!,R.color.white) // 차트의 Bar 부분 색깔 지정
 
-        val dataSet :ArrayList<IBarDataSet> = ArrayList()
-        dataSet.add(set)
-        val data = BarData(dataSet)
-        data.barWidth = 0.3f
+        val dataSet :ArrayList<IBarDataSet> = ArrayList() // 데이터셋 리스트
+        dataSet.add(set) // 데이터셋 리스트에 set 추가
+        val data = BarData(dataSet) // 보여질 데이터인 BarData
+        data.barWidth = 0.6f // 차트의 bar 너비 지정
         barChart.run {
-            this.data = data
-            setFitBars(true)
-            invalidate()
+            this.data = data // 차트의 데이터를 data로 설정
+            invalidate() // View를 다시 draw하는 함수 호출
         }
     }
-    // 하단은 차트 표시에 필요한 함수 정의한 것을 전부 정리해 둔 것 -> 코드 분석 후 주석 추가 예정
+
+    // 하단에 차트 표시를 위해 정의한 함수를 전부 정리해두었음.
 
     // 차트의 속성을 조정하는 함수
     fun barChartSet(context: Context, barChart: BarChart) {
-        barChart.description.isEnabled = false
-        barChart.setMaxVisibleValueCount(8)
-        barChart.setPinchZoom(false)
-        barChart.setDrawBarShadow(false)
-        barChart.setDrawGridBackground(false)
-        barChart.axisRight.isEnabled = false
-        barChart.setTouchEnabled(false)
-        barChart.animateY(2000)
-        barChart.legend.isEnabled = false
+        barChart.description.isEnabled = false // 라벨의 Description 표시 X
+        barChart.setMaxVisibleValueCount(8) // 그래프 최대 개수를 8로 지정
+        barChart.setPinchZoom(true) // 줌인 가능하도록 설정
+        barChart.setDrawBarShadow(false) // 차트에 그림자 속성 주지 않음
+        barChart.setDrawGridBackground(false) // 차트 배경에 그리드 라인 넣지 않음
+        barChart.axisRight.isEnabled = false // 왼쪽 y축만 보이고, 오른쪽 y축은 보이지 않게
+        barChart.setTouchEnabled(false) // 차트 터치해도 아무 변화 X
+        barChart.animateY(1500) // 1.5초 동안 바 차트가 올라가는 애니메이션 효과 추가
+        barChart.legend.isEnabled = false // 차트 범례 표시 X
     }
 
     // 차트의 Y축 설정하는 함수
     fun barChartY(context: Context, barChart: BarChart) {
         barChart.axisLeft.run {
-            axisMaximum = 201f
-            axisMinimum = 0f
-            granularity = 50f
-            setDrawLabels(true)
-            setDrawGridLines(true)
-            setDrawAxisLine(false)
-            axisLineColor = ContextCompat.getColor(context,R.color.white)
-            gridColor = ContextCompat.getColor(context,R.color.white)
-            textColor = ContextCompat.getColor(context,R.color.white)
-            textSize = 13f
+            axisMaximum = 200f // y 최댓값을 200.0으로 설정
+            axisMinimum = 0f // y 최솟값을 0.0으로 설정
+            granularity = 50f // y축 간격 설정(50.0)
+            setDrawLabels(true) // y축 옆에 라벨 표시
+            setDrawGridLines(false) // 수평 방향의 라인 표시 X
+            setDrawAxisLine(true) // y축 선 표시
+            axisLineColor = ContextCompat.getColor(context,R.color.white) // y축 선의 컬러 지정
+            textColor = ContextCompat.getColor(context,R.color.white) // y축 글자 컬러 지정
+            textSize = 13f // y축 글자 크기 조정(단위 : pixels)
         }
     }
 
     // 차트의 X축 설정하는 함수
     fun barChartX(context: Context, barChart: BarChart) {
         barChart.xAxis.run {
-            position = XAxis.XAxisPosition.BOTTOM
-            granularity = 1f
-            setDrawAxisLine(true)
-            setDrawGridLines(false)
-
-            textColor = ContextCompat.getColor(context,R.color.white)
-            textSize = 12f
-            valueFormatter = MyXAxisFormatter()
-            labelRotationAngle = 90f
+            position = XAxis.XAxisPosition.BOTTOM // x축의 위치를 차트 하단부로 설정
+            granularity = 1f // x축 간격 설정(1.0)
+            setDrawGridLines(false) // 수직 방향의 라인 표시 X
+            setDrawAxisLine(true) // x축 선 표시
+            textColor = ContextCompat.getColor(context,R.color.white) // x축 글자 컬러 지정
+            textSize = 12f // x축 글자 크기 지엉
+            valueFormatter = MyXAxisFormatter() // x축의 라벨 바꿔주기 위해 필요
+            labelRotationAngle = 45f // x축 항목 글자 부분 45도 회전
         }
     }
 
     // X축 라벨(X축의 글자) 설정 함수
     inner class MyXAxisFormatter : ValueFormatter() {
-        private val days = arrayOf("공복","아침 식전","아침 식후","점심 식전","점심 식후","저녁 식전","저녁 식후","취침 전")
-        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-            return days.getOrNull(value.toInt()-1) ?: value.toString()
+        private val times = arrayOf("공복","아침 식전","아침 식후","점심 식전","점심 식후","저녁 식전","저녁 식후","취침 전") // x축 밑에 표시될 글자
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String { // value(축의 위치)를 입력받아 그 값에 해당하는 라벨의 이름 반환
+            return times.getOrNull(value.toInt()-1) ?: value.toString() // 축의 범위(여기서는 0~7)을 벗어날 경우 축의 인덱스를 String 타입으로 반환하여 리턴
         }
     }
 
-    // !!! DB 연결 후 주석 해제 !!!
     // 현재 로그인한 사용자 ID 가져오는 함수
     private fun getCurrentUserId(): String? {
         var userId: String? = null // 로그인 사용자 ID를 저장할 변수
