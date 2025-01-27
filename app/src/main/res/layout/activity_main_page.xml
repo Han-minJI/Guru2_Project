@@ -5,8 +5,13 @@
     android:id="@+id/DANO"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/navy"
     tools:context=".MainPage">
     <!-- 5번째 줄 : 기존 Id가 logoutButton으로 되어있어서 충돌이 일어남, 현재 생성된 모든 파일을 DANO로 변경 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <RelativeLayout
         android:id="@+id/some_id"
         android:layout_width="match_parent"
@@ -45,12 +50,35 @@
             android:background="@drawable/miniprofilevector"
             android:scaleType="fitCenter" />
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="false"
+            android:layout_marginTop="100dp"
+            android:fillViewport="true"
+            android:scrollbars="horizontal">
+
+            <LinearLayout
+                android:id="@+id/chartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#272D4F" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
         <FrameLayout
             android:id="@+id/login_button_container"
             android:layout_width="250dp"
             android:layout_height="57dp"
             android:layout_marginLeft="45dp"
-            android:layout_marginTop="280dp"
+            android:layout_marginTop="420dp"
             android:layout_marginRight="45dp"
             android:layout_centerHorizontal="true">
 
@@ -77,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="380dp"
+            android:layout_marginTop="500dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
@@ -108,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="530dp"
+            android:layout_marginTop="650dp"
             android:layout_marginRight="20dp"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
@@ -134,5 +162,6 @@
         </LinearLayout>
 
     </RelativeLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
