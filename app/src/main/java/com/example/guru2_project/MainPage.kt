@@ -1,6 +1,7 @@
 package com.example.guru2_project
 
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ class MainPage : AppCompatActivity() {
     lateinit var clinicRecordBtn:ImageButton//내원 기록하기 버튼
     lateinit var medCheckBtn:ImageButton //복약 체크하기 버튼
     lateinit var habitCheckBtn:ImageButton //생활 체크하기 버튼
+    lateinit var bloodRecordBtn:ImageButton // 혈당 기록하기 버튼
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +21,7 @@ class MainPage : AppCompatActivity() {
         clinicRecordBtn=findViewById(R.id.clinicRecordBtn)
         medCheckBtn=findViewById(R.id.medCheckBtn)
         habitCheckBtn=findViewById(R.id.habitCheckBtn)
+        bloodRecordBtn=findViewById(R.id.bloodRecordBtn)
 
         //이미지 버튼 클릭시 마이페이지로 넘어가도록
         mypagebutton.setOnClickListener {
@@ -41,6 +44,11 @@ class MainPage : AppCompatActivity() {
         //생활 체크하기 버튼 클릭시 생활 체크하기 화면으로 넘어가기
         habitCheckBtn.setOnClickListener {
             val intent=Intent(this,HabLstPage::class.java)
+            startActivity(intent)
+        }
+
+        bloodRecordBtn.setOnClickListener {
+            val intent=Intent(this,BloodRecord::class.java)
             startActivity(intent)
         }
 

@@ -18,7 +18,9 @@
         <activity
             android:name=".HabRegPage"
             android:exported="false" />
-        <activity android:name=".ClinicRecord" />
+        <activity android:name=".ClinicRecord" /> <!-- 내원 기록 입력-->
+        <activity android:name=".BloodRecord" /> <!-- 혈당 기록 입력-->
+
         <activity
             android:name=".SussessPage"
             android:exported="false" />

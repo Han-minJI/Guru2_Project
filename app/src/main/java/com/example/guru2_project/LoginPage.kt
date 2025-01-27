@@ -33,7 +33,8 @@ class LoginPage : AppCompatActivity() {
         signupbutton = findViewById(R.id.gotoSignupButton)
 
         // DBManager 초기화
-        dbManager = DBManager(this, "userDB", null, 11) // 버전 6으로 통일 , 생년월일 추가하면 버전 7까지 버전 올라갈 것 같음
+        dbManager = DBManager(this, "userDB", null, 13)
+        // 버전 6으로 통일 , 생년월일 추가하면 버전 7까지 버전 올라갈 것 같음
 
         // 회원가입 페이지로 이동
         signupbutton.setOnClickListener {

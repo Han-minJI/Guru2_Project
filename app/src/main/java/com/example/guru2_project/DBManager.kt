@@ -38,6 +38,7 @@ class DBManager(context: Context?,
                 "medi_check INTEGER)"
         )
 
+        // 내원 기록 테이블
         db!!.execSQL("CREATE TABLE clinicRecord(userId TEXT, date TEXT, reason TEXT)")
 
         // 생활 습관 체크 테이블 --> 나의 생활 체크 등록하기 버튼 클릭 시 생성
@@ -51,6 +52,12 @@ class DBManager(context: Context?,
                 "habit_content TEXT," +
                 "habit_check INTEGER)"
         )
+
+        // 혈당 측정 관련 테이블
+        db!!.execSQL("CREATE TABLE bloodRecord(userId Text, " +
+                "date TEXT, blood TEXT, bloodtime Text," +
+                " PRIMARY KEY(userId, bloodtime))")
+
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -59,6 +66,8 @@ class DBManager(context: Context?,
         db?.execSQL("DROP TABLE IF EXISTS mediTBL") // 복약 체크 테이블
         db?.execSQL("DROP TABLE IF EXISTS clinicRecord")
         db?.execSQL("DROP TABLE IF EXISTS habitTBL")
+        db?.execSQL("DROP TABLE IF EXISTS bloodRecord")
+
         onCreate(db)
     }
 }
