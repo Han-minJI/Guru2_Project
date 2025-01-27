@@ -52,4 +52,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
     implementation("com.jakewharton.threetenabp:threetenabp:1.4.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
