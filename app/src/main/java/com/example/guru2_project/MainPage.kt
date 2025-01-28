@@ -85,7 +85,7 @@ class MainPage : AppCompatActivity() {
         var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
 
         // 혈당량 값을 가져오기만 할 것이므로 읽기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 13)
+        dbManager = DBManager(this, "userDB", null, 14)
         sqlitedb = dbManager.readableDatabase
 
         // 조건 -> 사용자 ID가 동일하며, 오늘 등록한 것
@@ -202,7 +202,7 @@ class MainPage : AppCompatActivity() {
         var userId: String? = null // 로그인 사용자 ID를 저장할 변수
 
         // 값을 가져오기만 할 것이므로 읽기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 13)
+        dbManager = DBManager(this, "userDB", null, 14)
         val sqlitedb = dbManager.readableDatabase
 
         val cursorId = sqlitedb.rawQuery("SELECT * FROM session;", null) // session 테이블 값 읽어오기

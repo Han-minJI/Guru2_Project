@@ -50,7 +50,7 @@ class ClinicRecord : AppCompatActivity(){
         val fragmentContainer: View = findViewById(R.id.fragmentContainer)
         val fragmentContainer2:View=findViewById(R.id.fragmentContainer2)// 두번째 프래그먼트
 
-        dbManager = DBManager(this, "userDB", null, 13)
+        dbManager = DBManager(this, "userDB", null, 14)
 
 
         //캘린더뷰에 데코레이터 추가

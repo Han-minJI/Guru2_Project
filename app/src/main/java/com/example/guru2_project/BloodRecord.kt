@@ -44,7 +44,7 @@ class BloodRecord : AppCompatActivity() {
         bloodInsertBtn=findViewById(R.id.bloodInsertBtn)
         bloodInsertEdt=findViewById(R.id.bloodInsertEdt)
 
-        dbManager = DBManager(this, "userDB", null, 13)
+        dbManager = DBManager(this, "userDB", null, 14)
 
 
         // 스피너 항목에 들어갈 stringArray
