@@ -22,6 +22,22 @@
             android:background="#272D4F">
 
             <!-- 프로필 이미지 -->
+
+            <TextView
+                android:id="@+id/dano"
+                android:layout_width="wrap_content"
+                android:layout_height="98dp"
+                android:fontFamily="@font/rubiks"
+                android:gravity="top"
+                android:text="@string/dano"
+                android:textAppearance="@style/smalldano"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.036" />
+
             <ImageView
                 android:id="@+id/mypageimage"
                 android:layout_width="128dp"
@@ -80,13 +96,13 @@
             <ScrollView
                 android:id="@+id/todoScrView"
                 android:layout_width="343dp"
-                android:layout_height="164dp"
+                android:layout_height="150dp"
                 android:background="@drawable/img_my_page_rect"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.56">
+                app:layout_constraintVertical_bias="0.48000002">
 
                 <LinearLayout
                     android:id="@+id/todoLayout"
@@ -98,6 +114,118 @@
                 </LinearLayout>
             </ScrollView>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/pretendardvariable"
+                android:text="다노 커뮤니티"
+                android:textColor="@color/text_color2"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/todoScrView"
+                app:layout_constraintVertical_bias="0.32999998">
+
+                <LinearLayout
+                    android:id="@+id/cs_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/img_cs" />
+
+                    <TextView
+                        style="@style/mypage_txt_lst_theme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="고객센터" />
+
+                    <ImageButton
+                        android:id="@+id/btnToCS"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="250dp"
+                        android:background="@drawable/ic_arrow_forward" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/insta_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/img_insta" />
+
+                    <TextView
+                        style="@style/mypage_txt_lst_theme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="다노 인스타그램" />
+
+                    <ImageButton
+                        android:id="@+id/btnToInsta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="199dp"
+                        android:background="@drawable/ic_arrow_forward" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/youtube_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/img_youtube" />
+
+                    <TextView
+                        style="@style/mypage_txt_lst_theme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="다노 유튜브 채널" />
+
+                    <ImageButton
+                        android:id="@+id/btnToYoutube"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="194dp"
+                        android:background="@drawable/ic_arrow_forward" />
+                </LinearLayout>
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
@@ -108,7 +236,7 @@
             android:layout_marginLeft="50dp"
             android:layout_marginTop="550dp"
             android:layout_marginRight="50dp"
-            android:layout_marginBottom="70dp">
+            android:layout_marginBottom="30dp">
 
             <ImageButton
                 android:id="@+id/logoutButton"

@@ -108,5 +108,14 @@
         <item name="android:layout_margin">20dp</item>
         <item name="android:textSize">18sp</item>
     </style>
+
+    <!-- 마이페이지의 "고객센터 ~ 유튜브 채널" TextView 스타일 -->
+    <style name="mypage_txt_lst_theme">
+        <item name="android:textColor">@color/text_color2</item>
+        <item name="android:fontFamily">@font/pretendardvariable</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>
 

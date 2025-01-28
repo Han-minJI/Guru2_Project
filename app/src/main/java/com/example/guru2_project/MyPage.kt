@@ -21,8 +21,13 @@ class MyPage : AppCompatActivity() {
     lateinit var userBirthTextView :TextView
 
     // "아직 마치지 못한 일" 박스 관련 변수
-    lateinit var todoLayout: LinearLayout
+    lateinit var todoLayout: LinearLayout // 할 일 목록을 담을 레이아웃
     lateinit var sqlitedb : SQLiteDatabase
+
+    // 다노 커뮤니티 버튼 변수
+    lateinit var btnToCS : ImageButton // 고객센터 버튼
+    lateinit var btnToInsta : ImageButton // 다노 인스타그램 버튼
+    lateinit var btnToYoutube : ImageButton // 다노 유튜브 채널 버튼
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +38,13 @@ class MyPage : AppCompatActivity() {
         userTypeTextView = findViewById(R.id.userTypeTextView)
         userBirthTextView = findViewById(R.id.userBirthTextView)
 
-        // "아직 마치지 못한 일" 박스 관련 변수 연결
-        todoLayout = findViewById(R.id.todoLayout)
-        refreshTodoList()
+        // 다노 커뮤니티 버튼 변수 연결
+        btnToCS = findViewById(R.id.btnToCS) // 고객센터 버튼
+        btnToInsta = findViewById(R.id.btnToInsta) // 다노 인스타그램 버튼
+        btnToYoutube = findViewById(R.id.btnToYoutube) // 다노 유튜브 채널 버튼
+
+        todoLayout = findViewById(R.id.todoLayout) // "아직 마치지 못한 일" 박스 관련 변수 연결
+        refreshTodoList() // "아직 마치지 못한 일"에 텍스트를 추가하는 함수 호출
 
         dbManager = DBManager(this, "userDB", null, 13)
         //버전 6으로 통일 , 생년월일 추가하면 버전 7까지 버전 올라갈 것 같음
@@ -87,53 +96,74 @@ class MyPage : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        // 하단의 버튼 3개(다노 커뮤니티 관련 버튼) -> 클릭 시, 개발 중 페이지로 이동
+        btnToCS.setOnClickListener { // 고객센터 버튼 클릭 시
+            var intent = Intent(this, DevPage::class.java)
+            startActivity(intent)
+        }
+        btnToInsta.setOnClickListener { // 다노 인스타그램 버튼 클릭 시
+            var intent = Intent(this, DevPage::class.java)
+            startActivity(intent)
+        }
+        btnToYoutube.setOnClickListener { // 다노 유튜브 채널 버튼 클릭 시
+            var intent = Intent(this, DevPage::class.java)
+            startActivity(intent)
+        }
     }
 
+    // "아직 마치지 못한 일" TextView 동적 추가 함수
     private fun refreshTodoList() {
-        todoLayout.removeAllViews()
+        todoLayout.removeAllViews() // 일단 TextView를 담을 레이아웃의 모든 뷰를 삭제하고 시작
 
-        var nowUserID = getCurrentUserId()
-        var todayDayOfWeek = getDayOfWeek().toString()
+        var nowUserID = getCurrentUserId() // 현재 로그인한 사용자의 ID 가져오기
+        var todayDayOfWeek = getDayOfWeek().toString() // 오늘 무슨 요일인지 가져오기
 
+        // TextView 동적으로 추가하며 속성 적용
         val todoLstTxt = TextView(this).apply {
-            text = "아직 마치지 못한 일"
-            setTextAppearance(R.style.mypage_todo_title_theme)
+            text = "아직 마치지 못한 일" // TextView 내용 설정
+            setTextAppearance(R.style.mypage_todo_title_theme) // TextView 스타일 지정
         }
-        todoLayout.addView(todoLstTxt)
+        todoLayout.addView(todoLstTxt) // 해당 텍스트뷰 레이아웃에 추가하기
 
+        // 값을 가져오기만 할 것이므로 DB 읽기 전용으로 열기
         dbManager = DBManager(this, "userDB", null, 13)
         sqlitedb = dbManager.readableDatabase
 
+        // 조건 : 오늘 요일에 해당 & check 속성이 0(즉, 아직 체크하지 않은 것) & 현재 로그인한 사용자의 ID에 해당하는 것
+        // mediTBL에서 위 조건에 맞는 레코드만 가져옴
         val cursorMedi = sqlitedb.rawQuery(
             "SELECT * FROM mediTBL WHERE medi_day_of_week LIKE '%$todayDayOfWeek%' AND medi_check = 0 AND user_id = '$nowUserID';",
             null
         )
 
         while (cursorMedi.moveToNext()) {
-            val mediName = cursorMedi.getString(cursorMedi.getColumnIndexOrThrow("medi_name"))
+            val mediName = cursorMedi.getString(cursorMedi.getColumnIndexOrThrow("medi_name")) // 테이블의 medi_name(복용약 이름) 필드의 값 저장
 
             val textView = TextView(this).apply {
-                text = mediName
-                setTextAppearance(R.style.mypage_todo_txt_theme)
+                text = mediName // TextView의 text를 "복용약 이름"으로 설정
+                setTextAppearance(R.style.mypage_todo_txt_theme) // TextView 스타일 지정
             }
-            todoLayout.addView(textView)
+            todoLayout.addView(textView) // 속성 적용된 TextView를 앞서 지정한 Layout에 동적으로 추가
         }
 
+        // 조건 : 오늘 요일에 해당 & check 속성이 0(즉, 아직 체크하지 않은 것) & 현재 로그인한 사용자의 ID에 해당하는 것
+        // habitTBL에서 위 조건에 맞는 레코드만 가져옴
         val cursorHabit = sqlitedb.rawQuery(
             "SELECT * FROM habitTBL WHERE habit_day_of_week LIKE '%$todayDayOfWeek%' AND habit_check = 0 AND user_id = '$nowUserID';",
             null
         )
 
         while (cursorHabit.moveToNext()) {
-            val habitName = cursorHabit.getString(cursorHabit.getColumnIndexOrThrow("habit_name"))
+            val habitName = cursorHabit.getString(cursorHabit.getColumnIndexOrThrow("habit_name")) // 테이블의 habit_name(습관 이름) 필드의 값 저장
 
             val textView = TextView(this).apply {
-                text = habitName
-                setTextAppearance(R.style.mypage_todo_txt_theme)
+                text = habitName // TextView의 text를 "습관 이름"으로 설정
+                setTextAppearance(R.style.mypage_todo_txt_theme) // TextView 스타일 지정
             }
-            todoLayout.addView(textView)
+            todoLayout.addView(textView) // 속성 적용된 TextView를 앞서 지정한 Layout에 동적으로 추가
         }
-
+        // 사용한 모든 Cursor와 DB 닫기
         cursorHabit.close()
         cursorMedi.close()
         sqlitedb.close()
