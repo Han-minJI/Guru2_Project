@@ -9,6 +9,7 @@ import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.WindowManager.LayoutParams
 import android.widget.Button
 import android.widget.CheckBox
@@ -60,8 +61,10 @@ class HabLstPage : AppCompatActivity() {
         btnToHabReg = findViewById(R.id.btnToHabReg)    // HabRegPage (생활 습관 등록 화면) 으로 이동하는 버튼 -> "오늘의 목표 리스트를 등록해주세요"
         habLstLayout = findViewById(R.id.habLstLayout)  // 목표 체크리스트가 표시될 레이아웃
 
+        // 버그 수정 테스트
         // 화면에 표시되어있던 체크리스트를 우선 없애고 시작
-        onResume()
+//        onResume()
+        refreshHabList()
 
         btnToHabReg.setOnClickListener { // "오늘의 목표 리스트를 등록해주세요" 버튼 클릭 시
             // HabRegPage(생활 습관 등록 화면)으로 Intent 전달하며 화면 전환
@@ -117,16 +120,17 @@ class HabLstPage : AppCompatActivity() {
         return todayDayOfWeek   // 오늘 무슨 요일인지 반환
     }
 
-    // 다시 앱으로 돌아왔을 때 호출되는 함수 재정의
-    override fun onResume() {
-        super.onResume()
-
-        // <화면 새로고침한 뒤, 나의 생활 CheckBox 동적으로 추가>하는 함수 호출
-        refreshMedList()
-    }
+    // 버그 수정 테스트
+//    // 다시 앱으로 돌아왔을 때 호출되는 함수 재정의
+//    override fun onResume() {
+//        super.onResume()
+//
+//        // <화면 새로고침한 뒤, 나의 생활 CheckBox 동적으로 추가>하는 함수 호출
+//        refreshMedList()
+//    }
 
     // 나의 생활 체크리스트 하나씩 추가하는 함수
-    private fun refreshMedList() {
+    private fun refreshHabList() {
         habLstLayout.removeAllViews() // 우선, 해당 레이아웃에서 모든 뷰 삭제 후 진행
 
         var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
@@ -141,8 +145,9 @@ class HabLstPage : AppCompatActivity() {
         // <하루가 지난 상태>인 경우 -> [habit_check] 필드 값을 0으로, [habit_date] 필드 값을 오늘 날짜로 업데이트
         // 하루가 지나면 체크된 체크박스도 전부 초기화해줘야 함. 그럴려면 마지막으로 앱을 실행한 날짜를 알아야함
         // 따라서 habit_date 필드에 지금 현재 앱을 실행한 날짜를 주기적으로 기록해주는 것.
-        sqlitedb.execSQL("UPDATE habitTBL SET habit_check = 0 WHERE habit_date != '${LocalDate.now()}' AND user_id = '$nowUserID';")
-        sqlitedb.execSQL("UPDATE habitTBL SET habit_date = '${LocalDate.now()}' WHERE habit_date != '${LocalDate.now()}' AND user_id = '$nowUserID';")
+        // 버그 수정 테스트
+        sqlitedb.execSQL("UPDATE habitTBL SET habit_check = 0 WHERE habit_date != '${LocalDate.now()}';")
+        sqlitedb.execSQL("UPDATE habitTBL SET habit_date = '${LocalDate.now()}' WHERE habit_date != '${LocalDate.now()}';")
 
         // 사용자 ID가 동일하며, 앱을 실행한 요일이 포함된 체크리스트만 읽어옴
         val cursor = sqlitedb.rawQuery(
@@ -191,12 +196,25 @@ class HabLstPage : AppCompatActivity() {
                 setPadding(100, 0, 0, 0) // checkBox의 padding 설정
 
                 // checkBox의 체크 속성 설정 - 사용자가 체크를 했으며, 오늘 체크를 한 경우에만 체크 상태 유지
-                isChecked = (habCheck == 1 && habDate == LocalDate.now().toString())
+                // 버그 수정 테스트
+                setOnCheckedChangeListener(null) // 리스너 해제
+                if(habCheck == 1) {
+                    isChecked = true
+                }
+                else {
+                    isChecked = false
+                }
+//                isChecked = (habCheck == 1 && habDate == LocalDate.now().toString())
                 setBackgroundResource(R.drawable.med_lst_checkbox_selector) // 체크 여부에 따른 backGround 이미지 변경
 
                 // 체크 상태가 변경된 경우(즉, 사용자가 체크박스를 클릭한 경우) 이벤트 처리
+                tag = habitNum // 버그 수정 테스트
                 setOnCheckedChangeListener { _, isChecked ->
-                    updateMediCheck(habitNum, isChecked) // DB의 habitTBL의 check 여부를 저장하는 함수 호출
+                    // 버그 수정 테스트
+                    setBackgroundResource(R.drawable.med_lst_checkbox_selector)
+                    val habitNumForUpDate = tag as Int // 버그 수정 테스트
+                    updateMediCheck(habitNumForUpDate, isChecked) // DB의 habitTBL의 check 여부를 저장하는 함수 호출, 버그 수정 테스트(mediNum -> mediNumForUpdate)
+                    Log.d("habitCheck", "habitNumForUpDate: $habitNumForUpDate, isChecked: $isChecked")
                 }
                 val params = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT) // checkBox를 담을 레이아웃 높이와 너비 지정
                 // 체크 박스 간의 위아래 간격 조정을 위해 위쪽 여백&아래쪽 여백 설정
