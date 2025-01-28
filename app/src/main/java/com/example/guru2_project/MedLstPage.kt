@@ -60,10 +60,7 @@ class MedLstPage : AppCompatActivity() {
         btnToMedReg = findViewById(R.id.btnToMedReg)    // MedRegPage (복용약 등록 화면) 으로 이동하는 버튼 -> 복용하시는 약을 등록해주세요
         medLstLayout = findViewById(R.id.medLstLayout)  // 복용 체크리스트가 표시될 레이아웃
 
-        // 버그 수정 테스트
-        // 화면에 표시되어있던 체크리스트를 우선 없애고 시작
-//        onResume()
-        refreshMedList()
+        refreshMedList()  // 나의 복약 체크리스트 목록 표시해주는 함수 호출
 
         btnToMedReg.setOnClickListener { // "복용하시는 약을 등록해주세요" 버튼 클릭 시
             // MedRegPage(복약 등록 화면)으로 Intent 전달하며 화면 전환
@@ -121,15 +118,6 @@ class MedLstPage : AppCompatActivity() {
         return todayDayOfWeek // 오늘 무슨 요일인지 반환
     }
 
-    // 버그 수정 테스트
-//    // 다시 앱으로 돌아왔을 때 호출되는 함수 재정의
-//    override fun onResume() {
-//        super.onResume()
-//
-//        // <화면 새로고침한 뒤, 복약 CheckBox 동적으로 추가> 함수 호출
-//        refreshMedList()
-//    }
-
     // 복약 체크리스트 하나씩 추가하는 함수
     private fun refreshMedList() {
         medLstLayout.removeAllViews() // 우선, 해당 레이아웃에서 모든 뷰 삭제 후 진행
@@ -142,11 +130,13 @@ class MedLstPage : AppCompatActivity() {
 
         todayDayOfWeek = getDayOfWeek().toString() // 오늘 요일 알아내는 함수 호출
 
-        // mediTBL(복약 등록 테이블)의 값을 업데이트 (현재 로그인한 사용자와 관련된 레코드만)
-        // <하루가 지난 상태>인 경우 -> [medi_check] 필드 값을 0으로, [medi_date] 필드 값을 오늘 날짜로 업데이트
-        // 하루가 지나면 체크된 체크박스도 전부 초기화해줘야 함. 그럴려면 마지막으로 앱을 실행한 날짜를 알아야함
-        // 따라서 medi_date 필드에 지금 현재 앱을 실행한 날짜를 주기적으로 기록해주는 것.
-        // 버그 수정 테스트
+        // mediTBL(복약 등록 테이블)의 값 업데이트
+        // <하루가 지난 상태>인 경우 -> 즉, medi_date 필드에 저장된 날짜와 오늘 날짜가 다름 -> [medi_check] 필드 값을 0으로, [medi_date] 필드 값을 오늘 날짜로 업데이트
+        // 하루가 지나면 이미 체크가 되어있는 체크박스들은 전부 초기화 필요함. 그럴려면 마지막으로 앱을 실행한 날짜가 DB에 주기적으로 기록이 되어야 함.
+
+        // 따라서, 하루가 지나면 아래 과정을 수행하게 되는 것이다.
+        // 1. 첫번째 execSQL문 : medi_check 필드의 값을 언체크 상태(0)으로 업데이트
+        // 2. 두번째 execSQL문 : medi_date 필드에 오늘 날짜를 주기적으로 기록해주기.
         sqlitedb.execSQL("UPDATE mediTBL SET medi_check = 0 WHERE medi_date != '${LocalDate.now()}';")
         sqlitedb.execSQL("UPDATE mediTBL SET medi_date = '${LocalDate.now()}' WHERE medi_date != '${LocalDate.now()}';")
 
@@ -187,8 +177,7 @@ class MedLstPage : AppCompatActivity() {
 
                 setPadding(100, 0, 0, 0) // checkBox의 padding 설정
 
-                // checkBox의 체크 속성 설정 - 사용자가 체크를 했으며, 오늘 체크를 한 경우에만 체크 상태 유지
-                // 버그 수정 테스트
+                // mediTBL(테이블)에서 체크 여부를 알아낸 후, 해당 checkBox의 isChecked 설정 변경해줌.
                 setOnCheckedChangeListener(null) // 리스너 해제
                 if(medCheck == 1) {
                     isChecked = true
@@ -196,17 +185,16 @@ class MedLstPage : AppCompatActivity() {
                 else {
                     isChecked = false
                 }
-//                isChecked = (medCheck == 1 && medDate == LocalDate.now().toString())
                 setBackgroundResource(R.drawable.med_lst_checkbox_selector) // 체크 여부에 따른 backGround 이미지 변경
 
+                tag = mediNum // mediNum(현재 체크박스의 고유 번호) 값을 tag에 저장
+
                 // 체크 상태가 변경된 경우(즉, 사용자가 체크박스를 클릭한 경우) 이벤트 처리
-                tag = mediNum // 버그 수정 테스트
                 setOnCheckedChangeListener {_, isChecked ->
-                    // 버그 수정 테스트
-                    setBackgroundResource(R.drawable.med_lst_checkbox_selector)
-                    val mediNumForUpdate = tag as Int // 버그 수정 테스트
-                    updateMediCheck(mediNumForUpdate, isChecked) // DB의 mediTBL에 check 여부를 업데이트하는 함수 호출, 버그 수정 테스트(mediNum -> mediNumForUpdate)
-                    Log.d("mediCheck", "mediNumForUpdate: $mediNumForUpdate, isChecked: $isChecked")
+                    setBackgroundResource(R.drawable.med_lst_checkbox_selector) // 일단 background 이미지 먼저 바꾸기
+                    val mediNumForUpdate = tag as Int  // 지역 변수 선언 및 "체크박스 고유 번호"로 초기화
+                    updateMediCheck(mediNumForUpdate, isChecked) // DB의 mediTBL에 check 여부를 업데이트하는 함수 호출 -> 매개변수로 "체크박스 고유 번호", "체크 여부"를 넘겨줌
+                    Log.d("mediCheck", "mediNumForUpdate: $mediNumForUpdate, isChecked: $isChecked") // 매개변수 값이 정확하게 넘어갔는지 확인하기 위해 로그 출력
                 }
                 val params = LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT) // checkBox를 담을 레이아웃 높이와 너비 지정
                 // 아래쪽 여백 (체크 박스 간의 위아래 간격 조정을 위해 위쪽 여백&아래쪽 여백 설정
