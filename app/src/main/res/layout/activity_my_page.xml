@@ -23,8 +23,9 @@
 
             <!-- 프로필 이미지 -->
 
-            <TextView
+            <Button
                 android:id="@+id/dano"
+                android:background="@android:color/transparent"
                 android:layout_width="wrap_content"
                 android:layout_height="98dp"
                 android:fontFamily="@font/rubiks"

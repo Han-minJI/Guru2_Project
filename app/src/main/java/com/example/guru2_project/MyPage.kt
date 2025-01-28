@@ -20,6 +20,8 @@ class MyPage : AppCompatActivity() {
     lateinit var userTypeTextView: TextView
     lateinit var userBirthTextView :TextView
 
+    lateinit var dano : Button // 메인화면으로 가는 "DANO" 버튼
+
     // "아직 마치지 못한 일" 박스 관련 변수
     lateinit var todoLayout: LinearLayout // 할 일 목록을 담을 레이아웃
     lateinit var sqlitedb : SQLiteDatabase
@@ -33,6 +35,7 @@ class MyPage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_page)
 
+        dano = findViewById(R.id.dano) // 메인 화면으로 가는 Dano 버튼
         logoutButton = findViewById(R.id.logoutButton)
         userNameTextView = findViewById(R.id.userNameTextView)
         userTypeTextView = findViewById(R.id.userTypeTextView)
@@ -95,6 +98,12 @@ class MyPage : AppCompatActivity() {
             val intent = Intent(this, LoginPage::class.java)
             startActivity(intent)
             finish()
+        }
+
+        // DANO 버튼 클릭 시 메인 페이지(메인 화면)으로 이동
+        dano.setOnClickListener {
+            var intent = Intent(this, MainPage::class.java)
+            startActivity(intent)
         }
 
         // 하단의 버튼 3개(다노 커뮤니티 관련 버튼) -> 클릭 시, 개발 중 페이지로 이동
