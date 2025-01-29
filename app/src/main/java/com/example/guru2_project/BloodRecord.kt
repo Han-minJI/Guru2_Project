@@ -8,12 +8,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.guru2_project.databinding.BloodRecordBinding
+import org.threeten.bp.LocalDate
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -27,7 +30,7 @@ class BloodRecord : AppCompatActivity() {
     //private val binding get()=_binding!!
 
     lateinit var tomain:ImageButton // 메인 화면 이동 버튼
-
+    lateinit var btnDelete:Button // 삭제 버튼
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,14 +41,15 @@ class BloodRecord : AppCompatActivity() {
         setContentView(binding.root)
 
         //오늘 날짜 받아오기
-        val calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val currentDate = dateFormat.format(calendar.time)
+        val today:LocalDate =LocalDate.now()
+        val dateFormat = org.threeten.bp.format.DateTimeFormatter.ofPattern("yyyy-MM-dd")  // 원하는 형식 지정
+        val currentDate =today.format(dateFormat)
         var currentTime:String?=null // 현재 혈당체크 시간
 
 
         bloodInsertBtn=findViewById(R.id.bloodInsertBtn)
         bloodInsertEdt=findViewById(R.id.bloodInsertEdt)
+        btnDelete=findViewById(R.id.btnDelete)
 
         dbManager = DBManager(this, "userDB", null, 14)
 
@@ -76,9 +80,6 @@ class BloodRecord : AppCompatActivity() {
             }
         }
 
-
-
-
         bloodInsertBtn.setOnClickListener {
 
             // DB 읽기 전용으로 불러오기
@@ -98,7 +99,7 @@ class BloodRecord : AppCompatActivity() {
             sqlitedb=dbManager.writableDatabase
             try{
                 sqlitedb.execSQL("INSERT INTO bloodRecord VALUES('"+nowUserID+"','"+currentDate+"','"+nowBlood+"','"+currentTime+"');")
-                //Log.d("$nowUserID,"+"$currentDate,"+"$nowBlood,"+"$currentTime","현재 정보")
+                Log.d("$nowUserID,"+"$currentDate,"+"$nowBlood,"+"$currentTime","현재 정보")
                 Toast.makeText(applicationContext, "$nowUserID,"+"$currentDate,"+"$nowBlood,"+"$currentTime", Toast.LENGTH_SHORT).show()
                 sqlitedb.close()
                 val intent= Intent(this,MainPage::class.java)
@@ -113,6 +114,11 @@ class BloodRecord : AppCompatActivity() {
         tomain.setOnClickListener {
             val intent= Intent(this,MainPage::class.java)
             startActivity(intent)
+        }
+
+        btnDelete.setOnClickListener {
+            sqlitedb=dbManager.writableDatabase
+            sqlitedb.execSQL("DELETE FROM bloodRecord;")
         }
     }
 
