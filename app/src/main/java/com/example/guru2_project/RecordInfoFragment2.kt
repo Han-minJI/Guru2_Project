@@ -19,6 +19,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class RecordInfoFragment2 : Fragment() {
 
+    // 방문 목적 입력 후 보여줄 화면
     private lateinit var showAllTv2: TextView
 
 

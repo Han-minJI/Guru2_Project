@@ -26,6 +26,9 @@ class BloodRecord : AppCompatActivity() {
     private lateinit var sqlitedb: SQLiteDatabase
     //private val binding get()=_binding!!
 
+    lateinit var tomain:ImageButton // 메인 화면 이동 버튼
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,6 +48,8 @@ class BloodRecord : AppCompatActivity() {
         bloodInsertEdt=findViewById(R.id.bloodInsertEdt)
 
         dbManager = DBManager(this, "userDB", null, 14)
+
+        tomain=findViewById(R.id.toMain)
 
 
         // 스피너 항목에 들어갈 stringArray
@@ -103,9 +108,11 @@ class BloodRecord : AppCompatActivity() {
                 Toast.makeText(applicationContext,"이미 입력한 시간입니다", Toast.LENGTH_SHORT).show()
             }
 
+        }
 
-
-
+        tomain.setOnClickListener {
+            val intent= Intent(this,MainPage::class.java)
+            startActivity(intent)
         }
     }
 
