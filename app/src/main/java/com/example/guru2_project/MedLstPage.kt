@@ -78,7 +78,7 @@ class MedLstPage : AppCompatActivity() {
             var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
 
             // 값을 읽어오기만 할 것이므로 읽기 전용으로 DB 열기
-            dbManager = DBManager(this, "userDB", null, 15)
+            dbManager = DBManager(this, "userDB", null, 16)
             sqlitedb = dbManager.readableDatabase
 
             // mediTBL에서 레코드 삭제 (user_id 필드의 값 == 현재 로그인한 사용자의 ID인 경우에만)
@@ -125,7 +125,7 @@ class MedLstPage : AppCompatActivity() {
         var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
 
         // 값을 Update해야 하므로 쓰기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 15)
+        dbManager = DBManager(this, "userDB", null, 16)
         sqlitedb = dbManager.writableDatabase
 
         todayDayOfWeek = getDayOfWeek().toString() // 오늘 요일 알아내는 함수 호출
@@ -215,7 +215,7 @@ class MedLstPage : AppCompatActivity() {
         var nowUserID = getCurrentUserId() // 현재 로그인한 사용자 ID 가져오기
 
         // 값을 업데이트해야 하므로 읽기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 15)
+        dbManager = DBManager(this, "userDB", null, 16)
         val sqlitedb = dbManager.writableDatabase
 
         // 이미 닫힌 DB를 reopen 하는 에러를 방지하기 위해 try-catch-finally로 작성
@@ -236,7 +236,7 @@ class MedLstPage : AppCompatActivity() {
         var userId: String? = null // 로그인 사용자 ID를 저장할 변수
 
         // 값을 가져오기만 할 것이므로 읽기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 15)
+        dbManager = DBManager(this, "userDB", null, 16)
         val sqlitedb = dbManager.readableDatabase
 
         val cursorId = sqlitedb.rawQuery("SELECT * FROM session;", null) // session 테이블 값 읽어오기
