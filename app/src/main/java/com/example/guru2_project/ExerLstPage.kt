@@ -55,7 +55,7 @@ class ExerLstPage : AppCompatActivity() {
             startActivity(intent)
         }
         btnBckToMain.setOnClickListener { // < 버튼(이전 버튼) 클릭 시, 이전 화면인 MainPage로 이동
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainPage::class.java)
             startActivity(intent)
         }
     }
