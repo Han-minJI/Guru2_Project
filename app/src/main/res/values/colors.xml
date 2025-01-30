@@ -26,4 +26,7 @@
     <color name="med_reg_chip_check">#344FA0</color>
     <color name="med_reg_chip_uncheck">#33FEFDFC</color>
     <color name="med_chip_text_color">#F5F5F5</color>
+
+    <!-- 운동 기록 Progressbar 배경색 -->
+    <color name="exer_progress_background">#DCE2F0</color>
 </resources>

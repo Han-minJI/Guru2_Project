@@ -117,5 +117,26 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
     </style>
+
+    <!-- 운동 기록의 타이머 페이지의 text 스타일(운동 이름)  -->
+    <style name="exer_timer_name_theme">
+        <item name="android:textColor">@color/text_color2</item>
+        <item name="android:fontFamily">@font/pretendardvariable</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <!-- 운동 기록의 타이머 페이지의 text 스타일(운동 시간) -->
+    <style name="exer_timer_value_theme">
+        <item name="android:textColor">@color/text_color2</item>
+        <item name="android:fontFamily">@font/pretendardvariable</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginBottom">40dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+    </style>
 </resources>
 
