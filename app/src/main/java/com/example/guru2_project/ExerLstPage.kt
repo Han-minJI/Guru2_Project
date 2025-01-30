@@ -73,7 +73,7 @@ class ExerLstPage : AppCompatActivity() {
 
         // count(*) -> 레코드 개수 총합 -> totalCount
         // sum(case when exer_check = 1 then 1 else 0 end) -> "exer_check = 1"(운동 체크리스트에서 사용자가 체크를 한 것)인 레코드 개수 총합 -> checkCount
-        val cursor = sqlitedb.rawQuery("select count(*) as totalCount, sum(case when exer_check = 1 then 1 else 0 end) as checkCount from exerTBL WHERE user_id = '$nowUserID';", null) // session 테이블 값 읽어오기
+        val cursor = sqlitedb.rawQuery("select count(*) as totalCount, sum(case when exer_check = 1 then 1 else 0 end) as checkCount from exerTBL WHERE user_id = '$nowUserID' and exer_date = '${LocalDate.now()}';", null) // session 테이블 값 읽어오기
         if (cursor.moveToFirst()) {
             totalCount = cursor.getInt(cursor.getColumnIndexOrThrow("totalCount")) // 새로 생성된 totalCount 열의 값 가져오기
             checkCount = cursor.getInt(cursor.getColumnIndexOrThrow("checkCount")) // 새로 생성된 checkCount 열의 값 가져오기
