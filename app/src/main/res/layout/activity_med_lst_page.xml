@@ -75,19 +75,6 @@
             tools:layout_editor_absoluteY="607dp" />
     </FrameLayout>
 
-
-    <!-- MedRegPage (복약 등록 화면) 으로 이동하는 버튼 -->
-    <!--    <ImageButton-->
-    <!--        android:id="@+id/btnToMedReg"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintVertical_bias="0.086" />-->
-
-    <!-- CheckBox(복약 체크리스트)가 계속 화면에 추가되므로 ScrollView 추가 -->
     <ScrollView
         android:id="@+id/medScrollView"
         android:layout_width="365dp"
@@ -95,7 +82,6 @@
         android:layout_gravity="center"
         android:layout_margin="10dp">
 
-        <!-- CheckBox(복약 체크리스트) 를 담을 LinearLayout -->
         <LinearLayout
             android:id="@+id/medLstLayout"
             android:layout_width="match_parent"
