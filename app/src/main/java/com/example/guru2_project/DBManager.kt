@@ -56,7 +56,7 @@ class DBManager(context: Context?,
         // 혈당 측정 관련 테이블
         db!!.execSQL("CREATE TABLE bloodRecord(userId Text, " +
                 "date TEXT, blood TEXT, bloodtime Text," +
-                " PRIMARY KEY(userId, bloodtime))")
+                " PRIMARY KEY(date, bloodtime))")
 
     }
 

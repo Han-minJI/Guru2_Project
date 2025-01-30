@@ -85,7 +85,7 @@ class RecordInfoFragment : Fragment() {
         val day=arguments?.getInt("day")
         val dateInsert = String.format("%04d-%02d-%02d", year, month, day) // db 입력 날짜
 
-        dbManager = DBManager(requireContext(), "userDB", null, 14)
+        dbManager = DBManager(requireContext(), "userDB", null, 15)
 
 
         // 내원일 입력하기 버튼

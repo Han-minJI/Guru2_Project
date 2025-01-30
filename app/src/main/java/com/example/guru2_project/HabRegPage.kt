@@ -154,7 +154,7 @@ class HabRegPage : AppCompatActivity() {
             var nowUserID = "" // 현재 사용자 ID를 저장할 변수
 
             // DB 읽기 전용으로 불러오기
-            dbManager = DBManager(this, "userDB", null, 14)
+            dbManager = DBManager(this, "userDB", null, 15)
             sqlitedb = dbManager.readableDatabase
 
             // session 테이블에서 현재 로그인한 사용자의 ID 가져오기
@@ -166,7 +166,7 @@ class HabRegPage : AppCompatActivity() {
             cursor.close()
 
             // DB 쓰기 전용으로 불러오기 (등록할 때 값을 Insert 해야 하므로)
-            dbManager = DBManager(this, "userDB", null, 14)
+            dbManager = DBManager(this, "userDB", null, 15)
             sqlitedb = dbManager.writableDatabase
 
             // habitTBL에 사용자가 입력한 (나의 생활 체크 목표, 수행할 요일, 목표 수행 시간대, 목표를 위해 더 적고 싶은 내용)을 저장
