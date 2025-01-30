@@ -49,7 +49,7 @@ class MyPage : AppCompatActivity() {
         todoLayout = findViewById(R.id.todoLayout) // "아직 마치지 못한 일" 박스 관련 변수 연결
         refreshTodoList() // "아직 마치지 못한 일"에 텍스트를 추가하는 함수 호출
 
-        dbManager = DBManager(this, "userDB", null, 16)
+        dbManager = DBManager(this, "userDB", null, 17)
         //버전 6으로 통일 , 생년월일 추가하면 버전 7까지 버전 올라갈 것 같음
 
         // 디버깅: 세션 데이터 출력
@@ -136,7 +136,7 @@ class MyPage : AppCompatActivity() {
         todoLayout.addView(todoLstTxt) // 해당 텍스트뷰 레이아웃에 추가하기
 
         // 값을 가져오기만 할 것이므로 DB 읽기 전용으로 열기
-        dbManager = DBManager(this, "userDB", null, 16)
+        dbManager = DBManager(this, "userDB", null, 17)
         sqlitedb = dbManager.readableDatabase
 
         // 조건 : 오늘 요일에 해당 & check 속성이 0(즉, 아직 체크하지 않은 것) & 현재 로그인한 사용자의 ID에 해당하는 것
@@ -184,7 +184,7 @@ class MyPage : AppCompatActivity() {
         var userId: String? = null // 로그인 사용자 ID를 저장할 변수
 
         // 값을 가져오기만 할 것이므로 읽기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 16)
+        dbManager = DBManager(this, "userDB", null, 17)
         val sqlitedb = dbManager.readableDatabase
 
         val cursorId = sqlitedb.rawQuery("SELECT * FROM session;", null) // session 테이블 값 읽어오기
