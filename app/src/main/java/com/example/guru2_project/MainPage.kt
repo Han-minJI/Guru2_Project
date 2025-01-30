@@ -25,6 +25,7 @@ class MainPage : AppCompatActivity() {
     lateinit var medCheckBtn:ImageButton //복약 체크하기 버튼
     lateinit var habitCheckBtn:ImageButton //생활 체크하기 버튼
     lateinit var bloodRecordBtn:ImageButton // 혈당 기록하기 버튼
+    lateinit var exerRecordBtn:ImageButton
 
     // 혈당량 Bar 차트 관련 변수
     lateinit var barChart: BarChart // Bar 차트
@@ -41,6 +42,7 @@ class MainPage : AppCompatActivity() {
         medCheckBtn=findViewById(R.id.medCheckBtn)
         habitCheckBtn=findViewById(R.id.habitCheckBtn)
         bloodRecordBtn=findViewById(R.id.bloodRecordBtn)
+        exerRecordBtn=findViewById(R.id.exerRecordBtn)
 
         // 혈당량 Bar 차트 관련 변수 -> 레이아웃 파일의 위젯 id와 연결
         barChart = findViewById(R.id.barChart) // 혈당량 값이 표시될 Bar 차트
@@ -72,6 +74,12 @@ class MainPage : AppCompatActivity() {
 
         bloodRecordBtn.setOnClickListener {
             val intent=Intent(this,BloodRecord::class.java)
+            startActivity(intent)
+        }
+
+        //나의 운동 기록 버튼 클릭 시 나의 운동 기록 화면으로 넘어가기
+        exerRecordBtn.setOnClickListener {
+            val intent = Intent(this, ExerLstPage::class.java)
             startActivity(intent)
         }
 
