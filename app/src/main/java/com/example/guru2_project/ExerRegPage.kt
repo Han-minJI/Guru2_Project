@@ -41,7 +41,7 @@ class ExerRegPage : AppCompatActivity() {
             var nowUserID = "" // 현재 사용자 ID를 저장할 변수
 
             // DB 읽기 전용으로 불러오기
-            dbManager = DBManager(this, "userDB", null, 17)
+            dbManager = DBManager(this, "userDB", null, 18)
             sqlitedb = dbManager.readableDatabase
 
             // session 테이블에서 현재 로그인한 사용자의 ID 가져오기
@@ -53,7 +53,7 @@ class ExerRegPage : AppCompatActivity() {
             cursor.close()
 
             // DB 쓰기 전용으로 불러오기 (등록할 때 값을 Insert 해야 하므로)
-            dbManager = DBManager(this, "userDB", null, 17)
+            dbManager = DBManager(this, "userDB", null, 18)
             sqlitedb = dbManager.writableDatabase
 
             // exerTBL에 사용자가 입력한 내용(운동 이름, 운동 시간)을 저장

@@ -63,7 +63,7 @@ class ExerLstPage : AppCompatActivity() {
     // Progressbar 진행도 세팅하는 함수
     fun progressSet() {
         // 값을 가져오기만 할 것이므로 읽기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 17)
+        dbManager = DBManager(this, "userDB", null, 18)
         val sqlitedb = dbManager.readableDatabase
 
         var totalCount = 0 // 사용자가 오늘 해야할 운동 목록이 총 몇 개인지 저장할 변수
@@ -98,7 +98,7 @@ class ExerLstPage : AppCompatActivity() {
         var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
 
         // 값을 Update해야 하므로 쓰기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 17)
+        dbManager = DBManager(this, "userDB", null, 18)
         sqlitedb = dbManager.writableDatabase
 
         txtExerDate.text = LocalDate.now().toString() // 오늘 날짜 표시
@@ -184,7 +184,7 @@ class ExerLstPage : AppCompatActivity() {
         var nowUserID = getCurrentUserId() // 현재 로그인한 사용자 ID 가져오기
 
         // 값을 업데이트해야 하므로 읽기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 17)
+        dbManager = DBManager(this, "userDB", null, 18)
         val sqlitedb = dbManager.writableDatabase
 
         // 이미 닫힌 DB를 reopen 하는 에러를 방지하기 위해 try-catch-finally로 작성
@@ -207,7 +207,7 @@ class ExerLstPage : AppCompatActivity() {
         var userId: String? = null // 로그인 사용자 ID를 저장할 변수
 
         // 값을 가져오기만 할 것이므로 읽기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 17)
+        dbManager = DBManager(this, "userDB", null, 18)
         val sqlitedb = dbManager.readableDatabase
 
         val cursorId = sqlitedb.rawQuery("SELECT * FROM session;", null) // session 테이블 값 읽어오기
@@ -246,7 +246,7 @@ class ExerLstPage : AppCompatActivity() {
         var nowUserID = getCurrentUserId() // 함수 호출하여 현재 로그인한 사용자 ID 가져오기
 
         // 값을 읽어오기만 할 것이므로 읽기 전용으로 DB 열기
-        dbManager = DBManager(this, "userDB", null, 17)
+        dbManager = DBManager(this, "userDB", null, 18)
         sqlitedb = dbManager.readableDatabase
 
         // 객체의 고유 번호를 통해 접근하여, exerTBL에서 해당 레코드 삭제 (user_id 필드의 값 == 현재 로그인한 사용자의 ID인 경우에만)

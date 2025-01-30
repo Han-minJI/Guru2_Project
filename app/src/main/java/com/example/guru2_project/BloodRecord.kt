@@ -51,7 +51,7 @@ class BloodRecord : AppCompatActivity() {
         bloodInsertEdt=findViewById(R.id.bloodInsertEdt)
         btnDelete=findViewById(R.id.btnDelete)
 
-        dbManager = DBManager(this, "userDB", null, 17)
+        dbManager = DBManager(this, "userDB", null, 18)
 
         tomain=findViewById(R.id.toMain)
 
