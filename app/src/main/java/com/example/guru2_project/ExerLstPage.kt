@@ -144,7 +144,6 @@ class ExerLstPage : AppCompatActivity() {
             chkExer.setOnCheckedChangeListener { _, isChecked ->
                 val exerNumForUpDate = tag1 as Int // 지역변수 선언 후 tag1 값으로 초기화
                 updateExerCheck(exerNumForUpDate, isChecked) // 테이블에 체크 상태를 업데이트해주는 함수 호출(현재 View 객체의 고유 번호 전달)
-                Toast.makeText(this, "${exerNumForUpDate}번을 클릭했어요!", Toast.LENGTH_SHORT).show() // 현재 클릭된 체크박스의 고유 번호 확인
                 Log.d("exerCheck", "exerNumForUpDate: $exerNumForUpDate, isChecked: $isChecked") // 현재 클릭된 체크박스의 고유 번호와 체크 여부 확인
             }
 
@@ -152,7 +151,7 @@ class ExerLstPage : AppCompatActivity() {
             btnExerName.setOnClickListener {
                 val exerTimer = tag2 as Int // 지역변수 선언 후 tag2로 초기화
                 val exerName = tag3 as String // 지역변수 선언 후 tag3로 초기화
-                Toast.makeText(this, "${exerTimer}분 타이머로 갑니다!", Toast.LENGTH_SHORT).show() // 해당 객체의 운동 시간 몇 분인지 확인
+                Toast.makeText(this, "${exerTimer}분 타이머 시작", Toast.LENGTH_SHORT).show() // 해당 객체의 운동 시간 몇 분인지 확인
                 val intent = Intent(this, ExerTimerPage::class.java)
                 intent.putExtra("EXER_TIMER", exerTimer) // exerTimer(운동 시간) 값을 intent에 담기
                 intent.putExtra("EXER_NAME", exerName) // exerName(운동 이름) 값을 intent에 담기
@@ -163,7 +162,6 @@ class ExerLstPage : AppCompatActivity() {
             btnExerOpt.setOnClickListener {
                 val exerNumForUpDate = tag1 as Int // 지역변수 선언 후 tag1으로 초기화
                 val exerNameForDelete = tag3 as String // 지역변수 선언 후 tag3로 초기화
-                Toast.makeText(this, "${exerNameForDelete}을/를 삭제하시겠어요?", Toast.LENGTH_SHORT).show() // 해당 객체의 운동 종류가 뭔지 확인
                 dialog(it, exerNameForDelete, exerNumForUpDate) // dialog 함수 호출(View 객체, 운동 종류, 고유 번호)
             }
             exerLstLayout.addView(view) // 최종적으로 원하는 레이아웃에 해당 View 객체 추가
