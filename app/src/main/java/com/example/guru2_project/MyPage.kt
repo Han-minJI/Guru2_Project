@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.time.LocalDate
 import java.util.Calendar
 
 class MyPage : AppCompatActivity() {
@@ -172,7 +173,26 @@ class MyPage : AppCompatActivity() {
             }
             todoLayout.addView(textView) // 속성 적용된 TextView를 앞서 지정한 Layout에 동적으로 추가
         }
+
+        // 조건 : 오늘 날짜에 해당 & check 속성이 0(즉, 아직 체크하지 않은 것) & 현재 로그인한 사용자의 ID에 해당하는 것
+        // exerTBL에서 위 조건에 맞는 레코드만 가져옴
+        val cursorExer = sqlitedb.rawQuery(
+            "SELECT * FROM exerTBL WHERE exer_date = '${LocalDate.now()}' AND exer_check = 0 AND user_id = '$nowUserID';",
+            null
+        )
+
+        while (cursorExer.moveToNext()) {
+            val exerName = cursorExer.getString(cursorExer.getColumnIndexOrThrow("exer_name")) // 테이블의 exer_name(운동 이름) 필드의 값 저장
+
+            val textView = TextView(this).apply {
+                text = exerName // TextView의 text를 "운동 이름"으로 설정
+                setTextAppearance(R.style.mypage_todo_txt_theme) // TextView 스타일 지정
+            }
+            todoLayout.addView(textView) // 속성 적용된 TextView를 앞서 지정한 Layout에 동적으로 추가
+        }
+
         // 사용한 모든 Cursor와 DB 닫기
+        cursorExer.close()
         cursorHabit.close()
         cursorMedi.close()
         sqlitedb.close()
