@@ -73,8 +73,7 @@ class ExerLstPage : AppCompatActivity() {
 
         // count(*) -> 레코드 개수 총합 -> totalCount
         // sum(case when exer_check = 1 then 1 else 0 end) -> "exer_check = 1"(운동 체크리스트에서 사용자가 체크를 한 것)인 레코드 개수 총합 -> checkCount
-//        val cursor = sqlitedb.rawQuery("select count(*) as totalCount, sum(case when exer_check = 1 then 1 else 0 end) as checkCount from exerTBL WHERE user_id = '$nowUserID';", null) // session 테이블 값 읽어오기
-        val cursor = sqlitedb.rawQuery("select count(*) as totalCount, sum(case when exer_check = 1 then 1 else 0 end) as checkCount from exerTBL;", null) // session 테이블 값 읽어오기
+        val cursor = sqlitedb.rawQuery("select count(*) as totalCount, sum(case when exer_check = 1 then 1 else 0 end) as checkCount from exerTBL WHERE user_id = '$nowUserID';", null) // session 테이블 값 읽어오기
         if (cursor.moveToFirst()) {
             totalCount = cursor.getInt(cursor.getColumnIndexOrThrow("totalCount")) // 새로 생성된 totalCount 열의 값 가져오기
             checkCount = cursor.getInt(cursor.getColumnIndexOrThrow("checkCount")) // 새로 생성된 checkCount 열의 값 가져오기
@@ -105,12 +104,8 @@ class ExerLstPage : AppCompatActivity() {
         txtExerDate.text = LocalDate.now().toString() // 오늘 날짜 표시
 
         // 사용자 ID가 동일하며, 오늘 등록한 운동 체크리스트만 가져옴
-//        val cursor = sqlitedb.rawQuery(
-//            "SELECT * FROM exerTBL WHERE exer_date = '${LocalDate.now()}' AND user_id = '$nowUserID';",
-//            null
-//        )
         val cursor = sqlitedb.rawQuery(
-            "SELECT * FROM exerTBL WHERE exer_date = '${LocalDate.now()}';",
+            "SELECT * FROM exerTBL WHERE exer_date = '${LocalDate.now()}' AND user_id = '$nowUserID';",
             null
         )
 
@@ -196,11 +191,8 @@ class ExerLstPage : AppCompatActivity() {
 
         // 이미 닫힌 DB를 reopen 하는 에러를 방지하기 위해 try-catch-finally로 작성
         try { // CheckBox의 체크 상태에 따라 exerTBL의 체크 여부 필드(exer_check)에 값을 저장
-//            sqlitedb.execSQL(
-//                "UPDATE exerTBL SET exer_check = ${if (isChecked) 1 else 0} WHERE exer_num = '$exerNum' AND user_id = '$nowUserID';"
-//            )
             sqlitedb.execSQL(
-                "UPDATE exerTBL SET exer_check = ${if (isChecked) 1 else 0} WHERE exer_num = '$exerNum';"
+                "UPDATE exerTBL SET exer_check = ${if (isChecked) 1 else 0} WHERE exer_num = '$exerNum' AND user_id = '$nowUserID';"
             )
         } catch (e: Exception) { // 예외 처리
             e.printStackTrace()
@@ -260,8 +252,7 @@ class ExerLstPage : AppCompatActivity() {
         sqlitedb = dbManager.readableDatabase
 
         // 객체의 고유 번호를 통해 접근하여, exerTBL에서 해당 레코드 삭제 (user_id 필드의 값 == 현재 로그인한 사용자의 ID인 경우에만)
-        sqlitedb.execSQL("DELETE FROM exerTBL WHERE exer_num = '" + num + "';")
-//        sqlitedb.execSQL("DELETE FROM exerTBL WHERE user_id = '" + nowUserID + "' and exer_num = '" + num + "';")
+        sqlitedb.execSQL("DELETE FROM exerTBL WHERE user_id = '" + nowUserID + "' and exer_num = '" + num + "';")
 
     }
 }
