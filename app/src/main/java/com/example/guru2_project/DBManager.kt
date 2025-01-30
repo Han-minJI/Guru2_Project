@@ -58,6 +58,16 @@ class DBManager(context: Context?,
                 "date TEXT, blood TEXT, bloodtime Text," +
                 " PRIMARY KEY(userId,date, bloodtime))")
 
+
+        // 나의 운동 기록 관련 테이블 -> 나의 운동 기록 등록하기 버튼 클릭 시 생성
+        db?.execSQL("CREATE TABLE exerTBL (" +
+                "exer_num INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "user_id TEXT, " +
+                "exer_name TEXT, " +
+                "exer_time TEXT," +
+                "exer_date TEXT," +
+                "exer_check INTEGER)"
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -67,6 +77,7 @@ class DBManager(context: Context?,
         db?.execSQL("DROP TABLE IF EXISTS clinicRecord")
         db?.execSQL("DROP TABLE IF EXISTS habitTBL")
         db?.execSQL("DROP TABLE IF EXISTS bloodRecord")
+        db?.execSQL("DROP TABLE IF EXISTS exerTBL")
 
         onCreate(db)
     }
