@@ -102,16 +102,36 @@
 
 
 
+
+        <!-- 회원가입 버튼 -->
+        <FrameLayout
+            android:id="@+id/forgetpasswd_container"
+            android:layout_width="328dp"
+            android:layout_height="57dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="410dp">
+
+            <ImageButton
+                android:id="@+id/forgetpasswdButton"
+                android:layout_width="194dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rectanglenavy" />
+
+            <TextView
+                android:id="@+id/forgetpasswd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Forget Password"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:textAppearance="@style/font1"/>
+        </FrameLayout>
+
         <!-- 패스워드 밑 라인 -->
-        <TextView
-            android:id="@+id/forgetpasswd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="420dp"
-            android:gravity="top"
-            android:text="Forget Password"
-            android:textAppearance="@style/font1" />
 
         <View
             android:id="@+id/line"

@@ -3,6 +3,7 @@ package com.example.guru2_project
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.media.Image
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -22,6 +23,8 @@ class LoginPage : AppCompatActivity() {
     lateinit var loginbutton: ImageButton
     lateinit var signupbutton: ImageButton
 
+    lateinit var forgetpasswdButton: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
@@ -31,6 +34,7 @@ class LoginPage : AppCompatActivity() {
 
         loginbutton = findViewById(R.id.loginbutton)
         signupbutton = findViewById(R.id.gotoSignupButton)
+        forgetpasswdButton = findViewById(R.id.forgetpasswdButton)
 
         // DBManager 초기화
         dbManager = DBManager(this, "userDB", null, 18)
@@ -39,6 +43,12 @@ class LoginPage : AppCompatActivity() {
         // 회원가입 페이지로 이동
         signupbutton.setOnClickListener {
             val intent = Intent(this, SignupPage::class.java)
+            startActivity(intent)
+        }
+
+        // 비밀번호찾기 페이지로 이동(개발 중)
+        forgetpasswdButton.setOnClickListener {
+            val intent = Intent(this, DevPage::class.java)
             startActivity(intent)
         }
 
