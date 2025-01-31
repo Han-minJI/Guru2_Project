@@ -66,10 +66,7 @@ class BloodRecord : AppCompatActivity() {
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 // 선택한 항목의 텍스트를 TextView에 표시
-                //if(position==0) return
-
                 currentTime= parent.getItemAtPosition(position).toString()
-                //tv_title.text = "$selectedItem"
 
             }
 
