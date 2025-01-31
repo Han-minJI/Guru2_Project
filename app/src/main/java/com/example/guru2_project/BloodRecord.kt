@@ -30,7 +30,6 @@ class BloodRecord : AppCompatActivity() {
     //private val binding get()=_binding!!
 
     lateinit var tomain:ImageButton // 메인 화면 이동 버튼
-    lateinit var btnDelete:Button // 삭제 버튼
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +48,6 @@ class BloodRecord : AppCompatActivity() {
 
         bloodInsertBtn=findViewById(R.id.bloodInsertBtn)
         bloodInsertEdt=findViewById(R.id.bloodInsertEdt)
-        btnDelete=findViewById(R.id.btnDelete)
 
         dbManager = DBManager(this, "userDB", null, 18)
 
@@ -116,10 +114,6 @@ class BloodRecord : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnDelete.setOnClickListener {
-            sqlitedb=dbManager.writableDatabase
-            sqlitedb.execSQL("DELETE FROM bloodRecord;")
-        }
     }
 
 
