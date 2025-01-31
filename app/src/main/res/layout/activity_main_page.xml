@@ -10,12 +10,13 @@
     <!-- 5번째 줄 : 기존 Id가 logoutButton으로 되어있어서 충돌이 일어남, 현재 생성된 모든 파일을 DANO로 변경 -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
     <RelativeLayout
         android:id="@+id/some_id"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#272D4F"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteY="0dp">
@@ -116,7 +117,7 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/abc"
+                android:background="@drawable/icon_exerrecordbtn"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
 
@@ -125,7 +126,7 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/abc2"
+                android:background="@drawable/icon_habitcheckbtn"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
         </LinearLayout>
@@ -138,6 +139,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="650dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:baselineAligned="false">
@@ -147,7 +149,7 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/abc3"
+                android:background="@drawable/icon_clinicrecordbtn"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
 
@@ -156,10 +158,15 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/abc4"
+                android:background="@drawable/icon_medicinebtn"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:background="#272D4F" />
 
     </RelativeLayout>
     </ScrollView>

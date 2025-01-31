@@ -14,15 +14,13 @@
         <RelativeLayout
             android:id="@+id/some_id"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="16dp"
+            android:layout_height="wrap_content"
             android:background="#272D4F"
             android:clipToOutline="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-
-            <!-- Auto layout, variables, and unit scale are not yet supported -->
+            <!-- 회원가입 텍스트 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,14 +31,12 @@
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 
+            <!-- 아이디 입력 -->
             <TextView
                 android:layout_width="278dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:layout_marginLeft="45dp"
                 android:layout_marginTop="113dp"
-                android:gravity="top"
                 android:text="사용할 아이디를 입력해주세요"
                 android:textAppearance="@style/font3" />
 
@@ -74,14 +70,12 @@
                     android:textSize="16sp" />
             </FrameLayout>
 
+            <!-- 비밀번호 입력 -->
             <TextView
                 android:layout_width="278dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:layout_marginLeft="45dp"
                 android:layout_marginTop="213dp"
-                android:gravity="top"
                 android:text="비밀번호를 설정해주세요"
                 android:textAppearance="@style/font3" />
 
@@ -115,14 +109,12 @@
                     android:textSize="16sp" />
             </FrameLayout>
 
+            <!-- 이름 입력 -->
             <TextView
                 android:layout_width="278dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
                 android:layout_marginLeft="45dp"
                 android:layout_marginTop="313dp"
-                android:gravity="top"
                 android:text="이름(또는 닉네임)을 입력해주세요"
                 android:textAppearance="@style/font3" />
 
@@ -155,7 +147,6 @@
                     android:textColor="#ffffff"
                     android:textSize="16sp" />
             </FrameLayout>
-
             <TextView
                 android:layout_width="278dp"
                 android:layout_height="wrap_content"
@@ -305,6 +296,8 @@
                     android:spinnerMode="dropdown" />
             </FrameLayout>
 
+
+            <!-- 가입 버튼 -->
             <FrameLayout
                 android:id="@+id/login_button_container"
                 android:layout_width="328dp"
@@ -312,7 +305,7 @@
                 android:layout_marginLeft="45dp"
                 android:layout_marginTop="650dp"
                 android:layout_marginRight="45dp"
-                android:layout_marginBottom="50dp">
+                android:layout_marginBottom="30dp">
 
                 <ImageButton
                     android:id="@+id/signupbutton"
@@ -324,14 +317,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/rubiks"
-                    android:gravity="center"
                     android:text="가입하기"
                     android:textColor="@color/navy"
                     android:textSize="18sp" />
             </FrameLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:background="#272D4F" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
-
-
