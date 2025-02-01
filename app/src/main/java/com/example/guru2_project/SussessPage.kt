@@ -18,6 +18,7 @@ class SussessPage : AppCompatActivity() {
 
         signupCheckButton = findViewById(R.id.signupCheckButton)
 
+        //회원가입 성공 확인 버튼 클릭 시 로그인 페이지로 이동
         signupCheckButton.setOnClickListener {
             val intent = Intent(this, LoginPage::class.java)
             startActivity(intent)

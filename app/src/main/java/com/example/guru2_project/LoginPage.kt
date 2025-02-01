@@ -14,15 +14,16 @@ import com.example.guru2_project.DBManager
 
 class LoginPage : AppCompatActivity() {
 
-    lateinit var dbManager: DBManager
+    lateinit var dbManager: DBManager //DB
     lateinit var sqlitedb: SQLiteDatabase
 
+    //id, 비밀번호
     lateinit var userid: EditText
     lateinit var userpasswd: EditText
 
+    //로그인, 회원가입, 비밀번호 찾기 버튼
     lateinit var loginbutton: ImageButton
     lateinit var signupbutton: ImageButton
-
     lateinit var forgetpasswdButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +47,7 @@ class LoginPage : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 비밀번호찾기 페이지로 이동(개발 중)
+        // 비밀번호찾기 페이지로 이동(개발 중 페이지로 이동)
         forgetpasswdButton.setOnClickListener {
             val intent = Intent(this, DevPage::class.java)
             startActivity(intent)

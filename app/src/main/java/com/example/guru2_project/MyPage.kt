@@ -15,8 +15,12 @@ import java.util.Calendar
 
 class MyPage : AppCompatActivity() {
 
-    lateinit var dbManager: DBManager
-    lateinit var logoutButton: ImageButton
+
+    lateinit var dbManager: DBManager //DB
+
+    lateinit var logoutButton: ImageButton //로그아웃 버튼
+
+    //회원정보
     lateinit var userNameTextView: TextView
     lateinit var userTypeTextView: TextView
     lateinit var userBirthTextView :TextView

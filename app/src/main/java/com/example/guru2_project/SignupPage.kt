@@ -18,14 +18,13 @@ class SignupPage : AppCompatActivity() {
     lateinit var dbManager: DBManager // DBManager
     lateinit var sqlitedb: SQLiteDatabase
 
+    //회원 정보
     lateinit var userid: EditText
     lateinit var userpasswd: EditText
     lateinit var username: EditText
     lateinit var typeSpinner: Spinner
 
-
-
-    lateinit var signupbtn: ImageButton
+    lateinit var signupbtn: ImageButton //회원가입 버튼
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +58,6 @@ class SignupPage : AppCompatActivity() {
         dayAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item)
         val daySpinner: Spinner = findViewById(R.id.daySpinner)
         daySpinner.adapter = dayAdapter
-
 
 
         dbManager = DBManager(this, "userDB", null, 18)
