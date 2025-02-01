@@ -38,22 +38,23 @@ class ClinicRecord : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.clinic_record)
 
+        // 캘린더 뷰 사용
         val calendarView: MaterialCalendarView
         calendarView = findViewById(R.id.calendarView)
 
+        // 캘린더 커스텀을 위한 kt파일 데코레이터 객체
         val calendarDecorators = CalendarDecorators() // 데코레이터 객체 선언
-//        var selectedDate: CalendarDay? = null // 날짜 선택 됐는지 확인 변수
-//        var selectedAgain: Boolean = false// 날짜가 한번 더 클릭 됐는지 확인
 
-        tomain=findViewById(R.id.toMain)
+        tomain=findViewById(R.id.toMain)// 메인 페이지 이동 버튼
 
+        // 혈당 입력 화면(1)과 입력한 혈당량을 보여주기 위한 화면(2)
         val fragmentContainer: View = findViewById(R.id.fragmentContainer)
         val fragmentContainer2:View=findViewById(R.id.fragmentContainer2)// 두번째 프래그먼트
 
         dbManager = DBManager(this, "userDB", null, 18)
 
 
-        //캘린더뷰에 데코레이터 추가
+        //캘린더뷰에 데코레이터 추가 - addDecorators를 통해 한번에 모든 커스텀 붙여주기
         calendarView.addDecorators(
             calendarDecorators.dayDecorator(this),
             calendarDecorators.todayDecorator(this),
@@ -63,6 +64,7 @@ class ClinicRecord : AppCompatActivity(){
 
         )
 
+        // 처음에 오늘 날짜로 선택되도록 설정
         calendarView.setDateSelected(CalendarDay.today(), true)
 
         // 월 변경 될 때
@@ -90,6 +92,7 @@ class ClinicRecord : AppCompatActivity(){
         // 헤더 텍스트 모양 설정
         calendarView.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
 
+        // 캘린더 뷰에서 날짜 선택시
         calendarView.setOnDateChangedListener { widget, date, selected ->
             val year = date.year
             val month = date.month
@@ -98,43 +101,40 @@ class ClinicRecord : AppCompatActivity(){
             sqlitedb = dbManager.readableDatabase
             var nowUserID = "" // 현재 사용자 ID를 저장할 변수
 
-
             // session 테이블에서 현재 로그인한 사용자의 ID 가져오기
             val idCursor = sqlitedb.rawQuery("SELECT * FROM session;", null)
-
             while (idCursor.moveToNext()) {
                 nowUserID = idCursor.getString(idCursor.getColumnIndexOrThrow("userId"))
             }
             idCursor.close()
 
-
             // FrameLayout을 보이게 하고, 프래그먼트 삽입
             //캘린더 뷰 일정 불러오기
             val dateInsert = String.format("%04d-%02d-%02d", year, month, day) // db 입력 날짜
             val cursor: Cursor
-
+            //선택된 날짜에 해당하는 방문목적을 clinicRecord 테이블에서 가져옴.
             cursor=sqlitedb.rawQuery("SELECT reason FROM clinicRecord " +
                     "WHERE userId='$nowUserID' and date = '$dateInsert';",null)
 
+            // 방문 목적이 테이블에 이미 입력되어 있는 경우
             if(cursor.moveToNext())
             {
+                // 방문 목적 가져옴.
                 val selectReason=cursor.getString(cursor.getColumnIndexOrThrow("reason")).toString()
+                // 프레그먼트2에 보여줌.
                 val secondFragment=RecordInfoFragment2.newInstance(selectReason)
                 supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer2,secondFragment).commit()
                 fragmentContainer2.visibility=View.VISIBLE
                 fragmentContainer.visibility=View.GONE
 
-
-                Log.d("정보 불러오기","성공")
             }
 
+            // 방문목적이 아직 테이블에 입력되지 않은 경우 - 입력 창을 띄움.
             else{
 
-                // 프래그먼트를 FrameLayout에 동적으로 추가
+                // 프래그먼트를 FrameLayout에 동적으로 추가 - 방문목적 입력 창 띄움.
                 val fragment=RecordInfoFragment.newInstance(year, month, day)
                 supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment).commit()
-                Log.d("프래그먼트","새로생성")
-
                 fragmentContainer.visibility=View.VISIBLE
                 fragmentContainer2.visibility=View.GONE
             }
@@ -144,6 +144,7 @@ class ClinicRecord : AppCompatActivity(){
 
         }
 
+        //메인 페이지 이동
         tomain.setOnClickListener {
             val intent= Intent(this,MainPage::class.java)
             startActivity(intent)

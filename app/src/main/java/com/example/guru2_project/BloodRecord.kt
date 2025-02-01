@@ -27,7 +27,6 @@ class BloodRecord : AppCompatActivity() {
 
     private lateinit var dbManager: DBManager
     private lateinit var sqlitedb: SQLiteDatabase
-    //private val binding get()=_binding!!
 
     lateinit var tomain:ImageButton // 메인 화면 이동 버튼
 
@@ -48,15 +47,15 @@ class BloodRecord : AppCompatActivity() {
 
         bloodInsertBtn=findViewById(R.id.bloodInsertBtn)
         bloodInsertEdt=findViewById(R.id.bloodInsertEdt)
+        tomain=findViewById(R.id.toMain)
 
         dbManager = DBManager(this, "userDB", null, 18)
-
-        tomain=findViewById(R.id.toMain)
 
 
         // 스피너 항목에 들어갈 stringArray
         val menuList= resources.getStringArray(R.array.bloodTime).toList()
 
+        // 스피너 생성할 때의 Adapter 설정
         val adapter=OptionSpinnerAdapter(this,R.layout.item_spinner,menuList)
         adapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
         binding.spinner.adapter=adapter
@@ -75,6 +74,7 @@ class BloodRecord : AppCompatActivity() {
             }
         }
 
+        // 혈당 측정 후 입력하기 기능
         bloodInsertBtn.setOnClickListener {
 
             // DB 읽기 전용으로 불러오기
@@ -83,29 +83,30 @@ class BloodRecord : AppCompatActivity() {
 
             // session 테이블에서 현재 로그인한 사용자의 ID 가져오기
             val idCursor = sqlitedb.rawQuery("SELECT * FROM session;", null)
-
             while (idCursor.moveToNext()) {
                 nowUserID = idCursor.getString(idCursor.getColumnIndexOrThrow("userId"))
             }
             idCursor.close()
 
+            // 현재 입력한 혈당 가져오기
             val nowBlood=bloodInsertEdt.text.toString()
 
             sqlitedb=dbManager.writableDatabase
             try{
+                // nowUserId에 해당하는 사용자에 현재 날짜/입력 시간/혈당량 입력 - DB에 저장
                 sqlitedb.execSQL("INSERT INTO bloodRecord VALUES('"+nowUserID+"','"+currentDate+"','"+nowBlood+"','"+currentTime+"');")
-                Log.d("$nowUserID,"+"$currentDate,"+"$nowBlood,"+"$currentTime","현재 정보")
-                Toast.makeText(applicationContext, "$nowUserID,"+"$currentDate,"+"$nowBlood,"+"$currentTime", Toast.LENGTH_SHORT).show()
-                sqlitedb.close()
+
+                // 메인 페이지로 이동
                 val intent= Intent(this,MainPage::class.java)
                 startActivity(intent)
 
-            }catch(e:SQLiteConstraintException){
+            }catch(e:SQLiteConstraintException){// 이미 입력한 시간대의 혈당량을 또 입력하는 경우
                 Toast.makeText(applicationContext,"이미 입력한 시간입니다", Toast.LENGTH_SHORT).show()
             }
 
         }
 
+        // 메인 페이지 이동 버튼 클릭시
         tomain.setOnClickListener {
             val intent= Intent(this,MainPage::class.java)
             startActivity(intent)
