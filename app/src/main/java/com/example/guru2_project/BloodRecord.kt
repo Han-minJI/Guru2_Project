@@ -89,20 +89,34 @@ class BloodRecord : AppCompatActivity() {
             idCursor.close()
 
             // 현재 입력한 혈당 가져오기
-            val nowBlood=bloodInsertEdt.text.toString()
+            val nowBloodStr=bloodInsertEdt.text.toString()
 
-            sqlitedb=dbManager.writableDatabase
-            try{
-                // nowUserId에 해당하는 사용자에 현재 날짜/입력 시간/혈당량 입력 - DB에 저장
-                sqlitedb.execSQL("INSERT INTO bloodRecord VALUES('"+nowUserID+"','"+currentDate+"','"+nowBlood+"','"+currentTime+"');")
-
-                // 메인 페이지로 이동
-                val intent= Intent(this,MainPage::class.java)
-                startActivity(intent)
-
-            }catch(e:SQLiteConstraintException){// 이미 입력한 시간대의 혈당량을 또 입력하는 경우
-                Toast.makeText(applicationContext,"이미 입력한 시간입니다", Toast.LENGTH_SHORT).show()
+            if(nowBloodStr.isBlank())
+            {
+                Toast.makeText(applicationContext,"혈당을 입력해주세요",Toast.LENGTH_SHORT).show()
             }
+            else{
+                try {
+                    val nowBlood=nowBloodStr.toInt()
+                    sqlitedb=dbManager.writableDatabase
+                    try{
+                        // nowUserId에 해당하는 사용자에 현재 날짜/입력 시간/혈당량 입력 - DB에 저장
+                        sqlitedb.execSQL("INSERT INTO bloodRecord VALUES('"+nowUserID+"','"+currentDate+"','"+nowBlood+"','"+currentTime+"');")
+
+                        // 메인 페이지로 이동
+                        val intent= Intent(this,MainPage::class.java)
+                        startActivity(intent)
+
+                    }catch(e:SQLiteConstraintException){// 이미 입력한 시간대의 혈당량을 또 입력하는 경우
+                        Toast.makeText(applicationContext,"이미 입력한 시간입니다", Toast.LENGTH_SHORT).show()
+                    }
+                }catch (e:NumberFormatException){
+                    Toast.makeText(applicationContext,"정수로 입력해주세요", Toast.LENGTH_SHORT).show()
+
+                }
+            }
+
+
 
         }
 
